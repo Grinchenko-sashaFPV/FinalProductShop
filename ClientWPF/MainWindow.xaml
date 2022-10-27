@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:ClientWPF.MVVM.ViewModel"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:ClientWPF"
         mc:Ignorable="d"
         Icon="/Images/Icons/favicon.ico"
@@ -111,14 +110,6 @@
                     Command="{x:Static viewModel:MainViewModel.CloseCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
                                        AncestorType={x:Type Window}}}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseEnter">
-
-                            <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="ViewImportProgress"/>
-
-                        </i:EventTrigger>
-
-                    </i:Interaction.Triggers>
                     <Image 
                     Source="/Images/Icons/close-icon.png"
                     HorizontalAlignment="Left"
