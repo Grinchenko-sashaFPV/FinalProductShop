@@ -20,7 +20,11 @@ namespace ModelsLibrary.Models
         public string Name { get; set; }
 
         [Required]
+        public double Price { get; set; }
+
+        [Required]
         public double Rate { get; set; }
+
         [Required]
         [StringLength(1024)]
         public string Description { get; set; }
@@ -28,5 +32,9 @@ namespace ModelsLibrary.Models
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        [ForeignKey("Producer")]
+        public int ProducerId { get; set; }
+        public virtual Producer Producer { get; set; }
     }
 }
