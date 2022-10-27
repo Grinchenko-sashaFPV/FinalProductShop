@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientWPF.DesignMVVM.ViewModel
+namespace ClientWPF.MVVM.ViewModel
 {
-    class HomeViewModel
+    internal class ProfileViewModel
     {
     }
 }

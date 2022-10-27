@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace ClientWPF.DesignMVVM.ViewModel
+namespace ClientWPF.MVVM.ViewModel
 {
-    class MainViewModel : ObservableObject
+    internal class MainViewModel : ObservableObject
     {
         public RelayCommand HomeViewCommand { get; set; }
+        public RelayCommand ProductsViewCommand { get; set; }
 
         public HomeViewModel HomeVM { get; set; }
+        public ProductsViewModel ProductsVM { get; set; }
 
         private object _currentView;
 
@@ -30,12 +32,12 @@ namespace ClientWPF.DesignMVVM.ViewModel
         public MainViewModel()
         {
             HomeVM = new HomeViewModel();
+            ProductsVM = new ProductsViewModel();
 
             CurrentView = HomeVM;
 
-            HomeViewCommand = new RelayCommand(o => {
-                CurrentView = HomeVM;
-            });
+            HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
+            ProductsViewCommand = new RelayCommand(o => { CurrentView = ProductsVM; });
 
         }
         public static readonly ICommand CloseCommand =

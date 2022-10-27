@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:ClientWPF.DesignMVVM.ViewModel"
+        xmlns:viewModel="clr-namespace:ClientWPF.MVVM.ViewModel"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:ClientWPF"
         mc:Ignorable="d"
+        Icon="/Images/Icons/favicon.ico"
         Title="MainWindow"
         Height="800" Width="1300"
         WindowStyle="None"
@@ -31,12 +33,12 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Image 
-                Source="/Images/binance.png"
+                Source="/Images/Icons/icon-48.png"
                 HorizontalAlignment="Left"
                 Width="55px"
                 Height="55px"
                 Margin="14,10,0,10"/>
-            <TextBlock Text="Price Checker"
+            <TextBlock Text="Eshop"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Foreground="White"
@@ -54,12 +56,12 @@
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
 
-                <RadioButton Content="Find by crypto name"
+                <RadioButton Content="Products"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding FindCryptoViewCommand}"/>
+                             Command="{Binding ProductsViewCommand}"/>
 
                 <RadioButton Content="Profile"
                              Height="50"
@@ -99,19 +101,28 @@
                 </Border>
                 <TextBlock Grid.Column="1" x:Name="UserName"
                            HorizontalAlignment="Right"
-                           Height="25" Margin="15,0,0,0" 
+                           Height="34" Margin="15,0,20,0" 
                            VerticalAlignment="Center" 
                            FontSize="23" Foreground="White">UserName</TextBlock>
                 <Button
+                    Width="40px"
+                    Height="40px"
                     Background="Transparent"
                     Command="{x:Static viewModel:MainViewModel.CloseCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
                                        AncestorType={x:Type Window}}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+
+                            <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="ViewImportProgress"/>
+
+                        </i:EventTrigger>
+
+                    </i:Interaction.Triggers>
                     <Image 
-                    Source="/Images/close-icon.png"
+                    Source="/Images/Icons/close-icon.png"
                     HorizontalAlignment="Left"
-                    Width="40px"
-                    Height="40px"/>
+                    />
                 </Button>
             </WrapPanel>
             <ContentControl Grid.Row="1"
