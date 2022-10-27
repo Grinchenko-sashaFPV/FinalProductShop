@@ -10,7 +10,7 @@ using System.Data;
 namespace ModelsLibrary.Models
 {
     [Table("Products")]
-    internal class Product
+    public class Product
     {
         [Key]
         public int Id { get; set; }
@@ -19,6 +19,8 @@ namespace ModelsLibrary.Models
         [StringLength(100)]
         public string Name { get; set; }
 
+        [Required]
+        public double Rate { get; set; }
         [Required]
         [StringLength(1024)]
         public string Description { get; set; }
