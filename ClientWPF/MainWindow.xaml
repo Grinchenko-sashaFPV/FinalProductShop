@@ -3,10 +3,122 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:ClientWPF.DesignMVVM.ViewModel"
         xmlns:local="clr-namespace:ClientWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow"
+        Height="800" Width="1300"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        FontFamily="/Fonts/#Poppins"
+        MouseDown="Window_MouseDown">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Border Background="#272537"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="325*"/>
+                <ColumnDefinition Width="408*"/>
+                <ColumnDefinition Width="567*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image 
+                Source="/Images/binance.png"
+                HorizontalAlignment="Left"
+                Width="55px"
+                Height="55px"
+                Margin="14,10,0,10"/>
+            <TextBlock Text="Price Checker"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="White"
+                       FontSize="25"
+                       FontFamily="/Fonts/#Roboto"/>
+
+
+            <StackPanel Grid.Row="1">
+
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+
+                <RadioButton Content="Find by crypto name"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding FindCryptoViewCommand}"/>
+
+                <RadioButton Content="Profile"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="Saved"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="Exit"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+            <WrapPanel HorizontalAlignment="Left" Grid.Column="1" Grid.ColumnSpan="2" Margin="366,0,0,0">
+                <TextBox Width="300"
+                 Height="40"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Left"
+                 Margin="10"
+                 FontSize="18"
+                 Style="{StaticResource ModernTextBox}"/>
+                <Border
+                    Margin="0,5,0,0"
+                    Width="70" Height="70"
+                    CornerRadius="35"
+                    BorderThickness="1.6" BorderBrush="Gray"
+                    Grid.Column="1" HorizontalAlignment="Right">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/user-profile.jpg"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Grid.Column="1" x:Name="UserName"
+                           HorizontalAlignment="Right"
+                           Height="25" Margin="15,0,0,0" 
+                           VerticalAlignment="Center" 
+                           FontSize="23" Foreground="White">UserName</TextBlock>
+                <Button
+                    Background="Transparent"
+                    Command="{x:Static viewModel:MainViewModel.CloseCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                       AncestorType={x:Type Window}}}">
+                    <Image 
+                    Source="/Images/close-icon.png"
+                    HorizontalAlignment="Left"
+                    Width="40px"
+                    Height="40px"/>
+                </Button>
+            </WrapPanel>
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10,10,10,10"
+                            Content="{Binding CurrentView}" Grid.ColumnSpan="2"/>
+
+        </Grid>
+    </Border>
 </Window>
