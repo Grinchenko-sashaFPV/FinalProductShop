@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\MyProjectsExamples\FinalProductShop\ClientWPF\App.xaml
-1219584333
+4-1344218029
 
-6-502434485
+11-1429461264
 13-1310406943
-MainWindow.xaml;
+DesignMVVM\View\HomeView.xaml;MainWindow.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxTheme.xaml;
 
 True
 
