@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\MyProjectsExamples\FinalProductShop\ClientWPF\App.xaml
-4-1344218029
+7-1474241785
 
-11-1429461264
+17-141801716
 13-1310406943
-DesignMVVM\View\HomeView.xaml;MainWindow.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxTheme.xaml;
+MVVM\View\HomeView.xaml;MVVM\View\ProductsView.xaml;MVVM\View\ProfileView.xaml;MVVM\View\SavedView.xaml;MainWindow.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxTheme.xaml;
 
 True
 

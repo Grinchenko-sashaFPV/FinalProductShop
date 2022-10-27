@@ -55,9 +55,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="DesignMVVM\View\HomeView.xaml">
+    <Page Include="MVVM\View\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\View\ProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\ProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\SavedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -69,10 +81,22 @@
     </Compile>
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="DesignMVVM\ViewModel\HomeViewModel.cs" />
-    <Compile Include="DesignMVVM\ViewModel\MainViewModel.cs" />
-    <Compile Include="DesignMVVM\View\HomeView.xaml.cs">
+    <Compile Include="MVVM\ViewModel\HomeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\ProductsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\ProfileViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SavedViewModel.cs" />
+    <Compile Include="MVVM\View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ProductsView.xaml.cs">
+      <DependentUpon>ProductsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\SavedView.xaml.cs">
+      <DependentUpon>SavedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -115,15 +139,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DesignMVVM\Model\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\binance.png" />
-    <Resource Include="Images\close-icon.png" />
-    <Resource Include="Images\favicon.ico" />
+    <Resource Include="Images\Icons\close-icon.png" />
     <Resource Include="Images\icon-1.png" />
     <Resource Include="Images\user-profile.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\icon-1024.png" />
+    <Resource Include="Images\Icons\icon-512.png" />
+    <Resource Include="Images\Icons\icon-256.png" />
+    <Resource Include="Images\Icons\icon-128.png" />
+    <Resource Include="Images\Icons\favicon.ico" />
+    <Resource Include="Images\Icons\icon-48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

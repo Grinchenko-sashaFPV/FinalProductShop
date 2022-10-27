@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ClientWPF.MVVM.View.ProductsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClientWPF.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <TextBlock Text="Products"
+                   Foreground="White"
+                   FontSize="30"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,20"/>
+        <DockPanel>
+            <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#FFF1F1F1" Margin="0,0,10,0">
+                <StackPanel Margin="20 20">
+                    <ListView x:Name="ListViewPlats" ItemsSource="{Binding Plates}" SelectedItem="{Binding SelectedPlate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#FFF1F1F1" BorderThickness="0" BorderBrush="#FFF1F1F1" ScrollViewer.CanContentScroll="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10" Width="180" Height="240">
+                                    <StackPanel>
+                                        <Border Width="170" Height="170" CornerRadius="5" Margin="5">
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="1"/>
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding AlbumImagePath}"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <TextBlock Margin="5 0" Text="{Binding Cost, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium"/>
+                                        <TextBlock Margin="5 0" Text="{Binding Name}" FontSize="18"/>
+                                        <TextBlock Margin="5 0" Text="{Binding Author.Name}" FontSize="12"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </StackPanel>
+</UserControl>
