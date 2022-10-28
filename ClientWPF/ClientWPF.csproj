@@ -73,6 +73,14 @@
     <Compile Include="Migrations\202210271937477_UpdateProductMigration.designer.cs">
       <DependentUpon>202210271937477_UpdateProductMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210281403052_ProductImageMigration.cs" />
+    <Compile Include="Migrations\202210281403052_ProductImageMigration.designer.cs">
+      <DependentUpon>202210281403052_ProductImageMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210281415390_ProductImageRefactorMigration.cs" />
+    <Compile Include="Migrations\202210281415390_ProductImageRefactorMigration.designer.cs">
+      <DependentUpon>202210281415390_ProductImageRefactorMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Implementation\CategoriesRepository.cs" />
     <Compile Include="Repositories\Implementation\ProducersRepository.cs" />
     <Compile Include="Repositories\Implementation\ProductsRepository.cs" />
@@ -156,6 +164,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210271937477_UpdateProductMigration.resx">
       <DependentUpon>202210271937477_UpdateProductMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210281403052_ProductImageMigration.resx">
+      <DependentUpon>202210281403052_ProductImageMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210281415390_ProductImageRefactorMigration.resx">
+      <DependentUpon>202210281415390_ProductImageRefactorMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
