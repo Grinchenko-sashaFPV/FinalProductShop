@@ -14,9 +14,12 @@ namespace ModelsLibrary.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} is required")]
         [StringLength(100)]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        public double Popularity { get; set; }
 
         public IEnumerable<Product> Products { get; set; }
     }

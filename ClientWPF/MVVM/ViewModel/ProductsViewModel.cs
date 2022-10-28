@@ -24,7 +24,7 @@ namespace ClientWPF.MVVM.ViewModel
         private void LoadProducers()
         {
             Producers.Clear();
-            var producers = _producersRepository.GetAllProducers().ToList();
+            var producers = _producersRepository.GetAllProducers();
             foreach (var producer in producers)
                 Producers.Add(producer);
         }

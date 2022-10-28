@@ -14,6 +14,7 @@ namespace ClientWPF.Repositories.Implementation.Manager
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Producer> Producers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

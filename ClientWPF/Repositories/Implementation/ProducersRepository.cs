@@ -21,22 +21,22 @@ namespace ClientWPF.Repositories.Implementation
 
         public Producer GetProducerByName(string producerName)
         {
-            throw new NotImplementedException();
+            return _dbManager.Producers.Find(producerName);
         }
 
         public Producer GetProducersById(int producerId)
         {
-            throw new NotImplementedException();
+            return _dbManager.Producers.Find(producerId);
         }
 
         public List<Producer> GetProducersByRateAsc()
         {
-            throw new NotImplementedException();
+            return _dbManager.Producers.OrderBy(p => p.Rate).ToList();
         }
 
         public List<Producer> GetProducersByRateDesc()
         {
-            throw new NotImplementedException();
+            return _dbManager.Producers.OrderByDescending(p => p.Rate).ToList();
         }
     }
 }
