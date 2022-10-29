@@ -20,6 +20,10 @@
             <DataTemplate DataType="{x:Type viewModel:ProductsViewModel}">
                 <view:ProductsView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:AddProductViewModel}">
+                <view:AddProductView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
