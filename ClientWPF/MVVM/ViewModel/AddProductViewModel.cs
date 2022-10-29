@@ -1,5 +1,6 @@
 ﻿using ClientWPF.Core;
 using ClientWPF.Repositories.Implementation;
+using ClientWPF.Repositories.Interfaces;
 using Microsoft.Win32;
 using ModelsLibrary.Models;
 using System;
@@ -17,23 +18,19 @@ namespace ClientWPF.MVVM.ViewModel
     public class AddProductViewModel : INotifyPropertyChanged
     {
         private readonly ProductImagesRepository _productImagesRepository;
+        private readonly CategoriesRepository _categoriesRepository;
+        private readonly ProducersRepository _producersRepository;
+        private readonly ProductsRepository _productsRepository;
+
         private Product _product;
-        private string _counter;
         public AddProductViewModel()
         {
             _productImagesRepository = new ProductImagesRepository();
+            _categoriesRepository = new CategoriesRepository();
+            _producersRepository = new ProducersRepository();
+            _productsRepository = new ProductsRepository();
+
             _product = new Product();
-            _product.Description = "Default Description";
-            _counter = "19jfdshg";
-        }
-        public string Counter
-        {
-            get { return _counter; }
-            set 
-            {
-                _counter = value;
-                OnPropertyChanged("Counter");
-            }
         }
         public string[] Pathes
         {
@@ -51,6 +48,69 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 _product.Description = value;
                 OnPropertyChanged("Description");
+            }
+        }
+        public string Name
+        {
+            get { return _product.Name; }
+            set
+            {
+                _product.Name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+        public double Price
+        {
+            get { return _product.Price; }
+            set
+            {
+                _product.Price = value;
+                OnPropertyChanged("Price");
+            }
+        }
+        public int Quantity
+        {
+            get { return _product.Quantity; }
+            set
+            {
+                _product.Quantity = value;
+                OnPropertyChanged("Quantity");
+            }
+        }
+        public double Rate
+        {
+            get { return _product.Rate; }
+            set
+            {
+                _product.Rate = value;
+                OnPropertyChanged("Rate");
+            }
+        }
+
+        private readonly RelayCommand _addProduct;
+        public RelayCommand AddProduct
+        {
+            get
+            {
+                return _addProduct ?? (new RelayCommand(obj =>
+                {
+                    _product.CreationDate = DateTime.Now;
+                    _product.CategoryId = 10;                                   // TODO
+                    _product.ProducerId = 2;                                   // TODO
+                    _productsRepository.AddNewProduct(_product);
+                    MessageBox.Show(_product.Id.ToString());
+                    var dbProduct = _productsRepository.GetProductByName(_product.Name);
+                    if(dbProduct != null)
+                    {
+                    _productImagesRepository.AddImages(Pathes, dbProduct.Id);
+                        MessageBox.Show("All okey!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Smth went wrong...");
+                    }
+                    //_productImagesRepository.AddImage(ofd.FileNames);
+                }));
             }
         }
         private readonly RelayCommand _openFileDialog;

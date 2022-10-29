@@ -20,7 +20,7 @@ namespace ClientWPF.Repositories.Implementation
             _dbManager = new ModelsManager();
         }
 
-        public void AddImage(string[] pathes)
+        public void AddImages(string[] pathes, int productId)
         {
             if(pathes.Length > 0)
             { 
@@ -35,7 +35,7 @@ namespace ClientWPF.Repositories.Implementation
                             FileExtension = Path.GetExtension(pathes[i]),
                             Image = buff,
                             Size = buff.Length,
-                            ProductId = 3
+                            ProductId = productId
                         });
                     }
                 }

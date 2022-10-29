@@ -9,9 +9,15 @@ namespace ClientWPF.Repositories.Implementation
 {
     public class ProductsRepository : IProductsRepository
     {
+        private readonly ModelsManager _dbManager;
+        public ProductsRepository()
+        {
+            _dbManager = new ModelsManager();
+        }
         public void AddNewProduct(Product product)
         {
-            throw new NotImplementedException();
+            _dbManager.Products.Add(product);
+            _dbManager.SaveChanges();
         }
 
         public void DeleteProductById(int productId)
@@ -31,9 +37,8 @@ namespace ClientWPF.Repositories.Implementation
 
         public Product GetProductByName(string productName)
         {
-            throw new NotImplementedException();
+            return _dbManager.Products.Where(p => p.Name.Equals(productName)).FirstOrDefault();
         }
-
         public List<Product> GetProductsByCategoryId(int categoryId)
         {
             throw new NotImplementedException();
