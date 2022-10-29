@@ -14,12 +14,19 @@ namespace ClientWPF.MVVM.ViewModel
     internal class ProductsViewModel
     {
         private readonly ProducersRepository _producersRepository;
+        private readonly CategoriesRepository _categoryRepository;
         public ObservableCollection<Producer> Producers { get; set; }
+        public ObservableCollection<Category> Categories { get; set; }
         public ProductsViewModel()
         {
             _producersRepository = new ProducersRepository();
+            _categoryRepository = new CategoriesRepository();
+
             Producers = new ObservableCollection<Producer>();
+            Categories = new ObservableCollection<Category>();
+
             LoadProducers();
+            LoadCategories();
         }
         private void LoadProducers()
         {
@@ -27,6 +34,13 @@ namespace ClientWPF.MVVM.ViewModel
             var producers = _producersRepository.GetAllProducers();
             foreach (var producer in producers)
                 Producers.Add(producer);
+        }
+        private void LoadCategories()
+        {
+            Categories.Clear();
+            var categories = _categoryRepository.GetAllCategories();
+            foreach (var category in categories)
+                Categories.Add(category);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

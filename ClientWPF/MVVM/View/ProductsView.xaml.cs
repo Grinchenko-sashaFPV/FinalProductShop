@@ -24,5 +24,11 @@ namespace ClientWPF.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            categoriesList.SelectedIndex = 0;
+            producersList.SelectedIndex = 0;
+        }
     }
 }

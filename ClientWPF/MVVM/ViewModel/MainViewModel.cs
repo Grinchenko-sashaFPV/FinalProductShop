@@ -19,8 +19,6 @@ namespace ClientWPF.MVVM.ViewModel
         public HomeViewModel HomeVM { get; set; }
         public ProductsViewModel ProductsVM { get; set; }
 
-        public ObservableCollection<ProductsViewModel> Products { get; set; }
-
         private object _currentView;
 
         public object CurrentView
@@ -37,8 +35,6 @@ namespace ClientWPF.MVVM.ViewModel
         {
             HomeVM = new HomeViewModel();
             ProductsVM = new ProductsViewModel();
-
-            Products = new ObservableCollection<ProductsViewModel>();
 
             CurrentView = HomeVM;
 
