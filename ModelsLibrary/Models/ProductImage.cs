@@ -15,11 +15,15 @@ namespace ModelsLibrary.Models
         public int Id { get; set; }
 
         [Required]
-        [Column(TypeName = "varbinary(MAX)")]
         public byte[] Image { get; set; }
+        
+        public string FileExtension { get; set; }
+        
+        public decimal Size { get; set; }
 
         [ForeignKey("Product")]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
+
     }
 }

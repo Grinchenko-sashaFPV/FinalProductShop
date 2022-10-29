@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.ComponentModel;
+using System.IO;
 
 namespace ModelsLibrary.Models
 {
@@ -45,5 +46,8 @@ namespace ModelsLibrary.Models
         public virtual Category Category { get; set; }
 
         public IEnumerable<ProductImage> ProductImage { get; set; }
+
+        [NotMapped]
+        public  IEnumerable<string> Pathes { get; set; }
     }
 }

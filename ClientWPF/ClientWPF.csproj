@@ -81,12 +81,28 @@
     <Compile Include="Migrations\202210281415390_ProductImageRefactorMigration.designer.cs">
       <DependentUpon>202210281415390_ProductImageRefactorMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210291137544_ChangedImageMigration.cs" />
+    <Compile Include="Migrations\202210291137544_ChangedImageMigration.designer.cs">
+      <DependentUpon>202210291137544_ChangedImageMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\CategoryViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\ProducerViewModel.cs" />
+    <Compile Include="MVVM\View\AddProductView.xaml.cs">
+      <DependentUpon>AddProductView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Implementation\CategoriesRepository.cs" />
     <Compile Include="Repositories\Implementation\ProducersRepository.cs" />
+    <Compile Include="Repositories\Implementation\ProductImagesRepository.cs" />
     <Compile Include="Repositories\Implementation\ProductsRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICategoriesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProducersRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProductImagesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductsRepository.cs" />
+    <Page Include="MVVM\View\AddProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210281415390_ProductImageRefactorMigration.resx">
       <DependentUpon>202210281415390_ProductImageRefactorMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210291137544_ChangedImageMigration.resx">
+      <DependentUpon>202210291137544_ChangedImageMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
