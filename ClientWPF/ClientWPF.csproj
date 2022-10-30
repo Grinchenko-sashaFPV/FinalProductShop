@@ -85,6 +85,10 @@
     <Compile Include="Migrations\202210291137544_ChangedImageMigration.designer.cs">
       <DependentUpon>202210291137544_ChangedImageMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210301146327_ProductImageNullableMigration.cs" />
+    <Compile Include="Migrations\202210301146327_ProductImageNullableMigration.designer.cs">
+      <DependentUpon>202210301146327_ProductImageNullableMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProducerViewModel.cs" />
@@ -194,6 +198,9 @@
     <EmbeddedResource Include="Migrations\202210291137544_ChangedImageMigration.resx">
       <DependentUpon>202210291137544_ChangedImageMigration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210301146327_ProductImageNullableMigration.resx">
+      <DependentUpon>202210301146327_ProductImageNullableMigration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -234,6 +241,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\defaultProductImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\StarRates\Star_rating_0.5_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_0_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_1.5_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_1_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_2.5_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_2_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_3.5_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_3_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_4.5_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_4_of_5.png" />
+    <Resource Include="Images\StarRates\Star_rating_5_of_5.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

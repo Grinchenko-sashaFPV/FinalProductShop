@@ -19,23 +19,56 @@
         </WrapPanel>
         <DockPanel>
             <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#423e5d" Margin="2" MinHeight="638">
-                <StackPanel Margin="20 20">
-                    <ListView x:Name="ListViewPlats" ItemsSource="{Binding Plates}" SelectedItem="{Binding SelectedPlate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#FFF1F1F1" BorderThickness="0" BorderBrush="#FFF1F1F1" ScrollViewer.CanContentScroll="True">
+                <StackPanel>
+                    <ListView x:Name="ListViewPlats" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" BorderBrush="#FFF1F1F1" ScrollViewer.CanContentScroll="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Width="180" Height="240">
-                                    <StackPanel>
-                                        <Border Width="170" Height="170" CornerRadius="5" Margin="5">
-                                            <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
-                                            </Border.Effect>
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding AlbumImagePath}"/>
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBlock Margin="5 0" Text="{Binding Cost, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium"/>
-                                        <TextBlock Margin="5 0" Text="{Binding Name}" FontSize="18"/>
-                                        <TextBlock Margin="5 0" Text="{Binding Author.Name}" FontSize="12"/>
+                                <Border HorizontalAlignment="Center"
+                                    CornerRadius="10"
+                                    BorderThickness="1.6" BorderBrush="DarkOrange"
+                                    Width="300"
+                                    Height="350"
+                                    Padding="5"
+                                    Background="#22202f">
+                                    <StackPanel Orientation="Vertical">
+                                        <DockPanel Height="210">
+                                            <Button DockPanel.Dock="Right" Width="40" Padding="8,0,2,0" Background="Transparent"
+                                                BorderThickness="0"  
+                                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                                <Image Source="/Images/Icons/arrow-forward.png"/>
+                                            </Button>
+                                            <Button DockPanel.Dock="Left" Width="40"  Padding="10,0,0,0" Background="Transparent"
+                                                BorderThickness="0"
+                                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                                <Image Source="/Images/Icons/arrow-back.png"/>
+                                            </Button>
+                                            <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
+                                                <Border
+                                                    Width="200" Height="200"
+                                                    Padding="0"
+                                                    CornerRadius="25"
+                                                    BorderThickness="1.6" BorderBrush="Gray">
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="{Binding Pathes, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    </Border.Background>
+                                                </Border>
+                                            </Button>
+
+                                        </DockPanel>
+                                        <StackPanel VerticalAlignment="Center" Margin="0 9">
+                                            <TextBlock FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                            <TextBlock HorizontalAlignment="Center" Foreground="White" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DockPanel>
+                                                <TextBlock FontSize="15" DockPanel.Dock="Left" HorizontalAlignment="Center" Width="70" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
+                                                <TextBlock FontSize="15" DockPanel.Dock="Right" HorizontalAlignment="Center"  Width="70" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+                                                <Image Source="{Binding StarRatesImageSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
+                                            </DockPanel>
+                                            <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
+                                            <DockPanel>
+                                                <TextBlock DockPanel.Dock="Left" Width="142" Foreground="AliceBlue" Text="{Binding Category.Name, UpdateSourceTrigger=PropertyChanged}" />
+                                                <TextBlock TextAlignment="Right" DockPanel.Dock="Right" Width="142" Foreground="AliceBlue" Text="{Binding Producer.Name, UpdateSourceTrigger=PropertyChanged}" />
+                                            </DockPanel>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>

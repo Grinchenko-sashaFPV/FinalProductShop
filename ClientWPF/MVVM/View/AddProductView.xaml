@@ -27,38 +27,43 @@
                     Padding="5"
                     Background="#22202f">
                 <StackPanel Orientation="Vertical">
-                    <DockPanel>
+                    <DockPanel Height="210">
                         <Button DockPanel.Dock="Right" Width="40" Padding="8,0,2,0" Background="Transparent"
                                 BorderThickness="0"  
                                 Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                             <Image Source="/Images/Icons/arrow-forward.png"/>
                         </Button>
                         <Button DockPanel.Dock="Left" Width="40"  Padding="10,0,0,0" Background="Transparent"
-                                BorderThickness="0"  
+                                BorderThickness="0"
                                 Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                             <Image Source="/Images/Icons/arrow-back.png"/>
                         </Button>
                         <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
                             <Border
-                                Margin="0, 10"
                                 Width="200" Height="200"
                                 Padding="0"
                                 CornerRadius="25"
                                 BorderThickness="1.6" BorderBrush="Gray">
                                 <Border.Background>
-                                    <ImageBrush ImageSource="/Images/Icons/defaultProductImage.png"/>
+                                    <ImageBrush ImageSource="{Binding Pathes[0], UpdateSourceTrigger=PropertyChanged}"/>
                                 </Border.Background>
                             </Border>
                         </Button>
 
                     </DockPanel>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Foreground="White" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Foreground="White" Text="{Binding Rate, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Foreground="White" Text="{Binding Rate, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel VerticalAlignment="Center" Margin="0 9">
+                        <TextBlock FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock HorizontalAlignment="Center" Foreground="White" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                        <DockPanel>
+                            <TextBlock FontSize="15" DockPanel.Dock="Left" HorizontalAlignment="Center" Width="70" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
+                            <TextBlock FontSize="15" DockPanel.Dock="Right" HorizontalAlignment="Center"  Width="70" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+                            <Image Source="{Binding StarRatesImageSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
+                        </DockPanel>
+                        <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Left" Width="142" Foreground="AliceBlue" Text="{Binding SelectedCategory.Name, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock TextAlignment="Right" DockPanel.Dock="Right" Width="142" Foreground="AliceBlue" Text="{Binding SelectedProducer.Name, UpdateSourceTrigger=PropertyChanged}" />
+                        </DockPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -74,7 +79,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Rate" FontSize="18" Margin="10" Foreground="White"/>
-                        <TextBox Width="160" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Rate, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Width="160" Height="29" SelectedIndex="0" ItemsSource="{Binding RatesValues}" SelectedValue="{Binding Rate, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Quantity" FontSize="18" Margin="10" Foreground="White"/>
@@ -82,7 +87,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Button Command="{Binding AddProduct}" Style="{StaticResource CustomButtonTemplate}" Margin="0 30" Width="250" Height="40" Content="Add"/>
+            <Button Command="{Binding AddProduct}" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Add"/>
 
         </StackPanel>
     </DockPanel>
