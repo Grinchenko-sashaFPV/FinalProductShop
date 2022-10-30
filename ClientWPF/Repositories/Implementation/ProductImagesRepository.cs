@@ -30,7 +30,7 @@ namespace ClientWPF.Repositories.Implementation
                     if(File.Exists(pathes[i]))
                     {
                         buff = File.ReadAllBytes(pathes[i]);
-                        _dbManager.ProductImages.Add(new ProductImage() 
+                        _dbManager.ProductImages.Add(new ProductImage()
                         {
                             FileExtension = Path.GetExtension(pathes[i]),
                             Image = buff,

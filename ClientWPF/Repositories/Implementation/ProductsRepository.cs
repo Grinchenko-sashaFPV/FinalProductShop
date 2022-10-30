@@ -27,7 +27,7 @@ namespace ClientWPF.Repositories.Implementation
 
         public List<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return _dbManager.Products.ToList();
         }
 
         public Product GetProductById(int productId)

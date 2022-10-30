@@ -14,7 +14,6 @@ namespace ModelsLibrary.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public byte[] Image { get; set; }
         
         public string FileExtension { get; set; }
