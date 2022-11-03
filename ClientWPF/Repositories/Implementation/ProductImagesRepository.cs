@@ -45,7 +45,7 @@ namespace ClientWPF.Repositories.Implementation
 
         public IEnumerable<ProductImage> GetImagesById(int productId)
         {
-            throw new NotImplementedException();
+            return _dbManager.ProductImages.Where(p => p.ProductId == productId);
         }
     }
 }

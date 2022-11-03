@@ -89,6 +89,14 @@
     <Compile Include="Migrations\202210301146327_ProductImageNullableMigration.designer.cs">
       <DependentUpon>202210301146327_ProductImageNullableMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202211031931478_ProductChangedMigration.cs" />
+    <Compile Include="Migrations\202211031931478_ProductChangedMigration.designer.cs">
+      <DependentUpon>202211031931478_ProductChangedMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211031957568_ChangedProductModelMigration.cs" />
+    <Compile Include="Migrations\202211031957568_ChangedProductModelMigration.designer.cs">
+      <DependentUpon>202211031957568_ChangedProductModelMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProducerViewModel.cs" />
@@ -200,6 +208,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210301146327_ProductImageNullableMigration.resx">
       <DependentUpon>202210301146327_ProductImageNullableMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211031931478_ProductChangedMigration.resx">
+      <DependentUpon>202211031931478_ProductChangedMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211031957568_ChangedProductModelMigration.resx">
+      <DependentUpon>202211031957568_ChangedProductModelMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
