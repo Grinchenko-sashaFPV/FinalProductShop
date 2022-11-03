@@ -48,6 +48,10 @@ namespace ModelsLibrary.Models
         public IEnumerable<ProductImage> ProductImage { get; set; }
 
         [NotMapped]
-        public  IEnumerable<string> Pathes { get; set; }
+        public IEnumerable<string> Pathes { get; set; }
+        [NotMapped]
+        public byte[] ImageBytes { get; set; }
+        [NotMapped]
+        public string CurrentRateSource { get; set; }
     }
 }
