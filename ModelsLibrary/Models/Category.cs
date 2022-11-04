@@ -21,6 +21,7 @@ namespace ModelsLibrary.Models
         [Required(ErrorMessage = "{0} is required")]
         public double Popularity { get; set; }
 
+        public IEnumerable<Producer> Producers { get; set; }
         public IEnumerable<Product> Products { get; set; }
     }
 }

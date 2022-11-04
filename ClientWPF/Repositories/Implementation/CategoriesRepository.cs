@@ -22,22 +22,22 @@ namespace ClientWPF.Repositories.Implementation
 
         public List<Category> GetCategoriesByPopularityAsc()
         {
-            throw new NotImplementedException();
+            return _dbManager.Categories.ThenBy(p => p.Popularity).ToList();
         }
 
         public List<Category> GetCategoriesByPopularityDesc()
         {
-            throw new NotImplementedException();
+            return _dbManager.Categories.ThenByDescending(p => p.Popularity).ToList();
         }
 
         public Category GetCategoryById(int categoryId)
         {
-            throw new NotImplementedException();
+            return _dbManager.Categories.Find(categoryId);
         }
 
         public Category GetCategoryByName(string categoryName)
         {
-            throw new NotImplementedException();
+            return _dbManager.Categories.Where(p => p.Name == categoryName).FirstOrDefault();
         }
     }
 }

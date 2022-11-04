@@ -7,70 +7,70 @@
              mc:Ignorable="d" 
              d:DesignHeight="705" d:DesignWidth="955"
              Loaded="UserControl_Loaded">
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <WrapPanel>
             <TextBlock Text="Products"
                        Foreground="White"
                        FontSize="30"
                        HorizontalAlignment="Left"
                        Margin="5 10"/>
-            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="30 0" Width="200" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
             <ComboBox x:Name="producersList" DockPanel.Dock="Left" Margin="5 0" Width="400" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
+            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="30 0" Width="200" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
         </WrapPanel>
-        <DockPanel>
-            <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#423e5d" Margin="2" MinHeight="638">
-                <StackPanel>
-                    <ListView x:Name="ListViewPlats" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" ScrollViewer.CanContentScroll="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border HorizontalAlignment="Center"
-                                    CornerRadius="10"
-                                    BorderThickness="1.6" BorderBrush="DarkOrange"
-                                    Width="300"
-                                    Height="350"
-                                    Padding="5"
-                                    Background="#22202f">
-                                    <StackPanel Orientation="Vertical">
-                                        <DockPanel Height="210">
-                                            <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
-                                                <Border
-                                                    Width="200" Height="200"
-                                                    Padding="0"
-                                                    CornerRadius="25"
-                                                    BorderThickness="1.6" BorderBrush="Gray">
-                                                    <Border.Background>
-                                                        <ImageBrush ImageSource="{Binding ImageBytes, UpdateSourceTrigger=PropertyChanged}"/>
-                                                    </Border.Background>
-                                                </Border>
-                                            </Button>
+        <ScrollViewer Background="#423e5d" Margin="2" Grid.Row="1">
+            <ListView x:Name="ListViewProducts" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center"
+                                CornerRadius="10"
+                                BorderThickness="1" BorderBrush="DarkOrange"
+                                Width="300"
+                                Height="350"
+                                Padding="5"
+                                Background="#22202f">
+                                <StackPanel Orientation="Vertical">
+                                    <DockPanel Height="210">
+                                        <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
+                                            <Border
+                                                Width="200" Height="200"
+                                                Padding="0"
+                                                CornerRadius="25"
+                                                BorderThickness="1.6" BorderBrush="Gray">
+                                                <Border.Background>
+                                                    <ImageBrush ImageSource="{Binding ImageBytes, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </Border.Background>
+                                            </Border>
+                                        </Button>
 
+                                    </DockPanel>
+                                    <StackPanel VerticalAlignment="Center" Margin="0 9">
+                                        <TextBlock FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock HorizontalAlignment="Center" Foreground="White" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                                        <DockPanel>
+                                            <TextBlock FontSize="15" DockPanel.Dock="Left" HorizontalAlignment="Center" Width="70" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
+                                            <TextBlock FontSize="15" DockPanel.Dock="Right" HorizontalAlignment="Center"  Width="70" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Image Source="{Binding CurrentRateSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
                                         </DockPanel>
-                                        <StackPanel VerticalAlignment="Center" Margin="0 9">
-                                            <TextBlock FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                                            <TextBlock HorizontalAlignment="Center" Foreground="White" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
-                                            <DockPanel>
-                                                <TextBlock FontSize="15" DockPanel.Dock="Left" HorizontalAlignment="Center" Width="70" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
-                                                <TextBlock FontSize="15" DockPanel.Dock="Right" HorizontalAlignment="Center"  Width="70" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
-                                                <Image Source="{Binding CurrentRateSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
-                                            </DockPanel>
-                                            <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
-                                            <DockPanel>
-                                                <TextBlock DockPanel.Dock="Left" Width="142" Foreground="AliceBlue" Text="{Binding Category.Name, UpdateSourceTrigger=PropertyChanged}" />
-                                                <TextBlock TextAlignment="Right" DockPanel.Dock="Right" Width="142" Foreground="AliceBlue" Text="{Binding Producer.Name, UpdateSourceTrigger=PropertyChanged}" />
-                                            </DockPanel>
-                                        </StackPanel>
+                                        <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
+                                        <DockPanel>
+                                            <TextBlock DockPanel.Dock="Left" Width="142" Foreground="AliceBlue" Text="{Binding Category.Name, UpdateSourceTrigger=PropertyChanged}" />
+                                            <TextBlock TextAlignment="Right" DockPanel.Dock="Right" Width="142" Foreground="AliceBlue" Text="{Binding Producer.Name, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DockPanel>
                                     </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                    </ListView>
-                </StackPanel>
-            </ScrollViewer>
-        </DockPanel>
-    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

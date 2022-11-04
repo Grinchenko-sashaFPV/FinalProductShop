@@ -60,6 +60,7 @@ namespace ClientWPF.MVVM.ViewModel
             set
             {
                 _selectedCategory = value;
+                LoadProducersByCategoryId(SelectedCategory.Id);
                 OnPropertyChanged("SelectedCategory");
             }
         }
@@ -85,6 +86,19 @@ namespace ClientWPF.MVVM.ViewModel
             var categories = _categoriesRepository.GetAllCategories();
             foreach (var category in categories)
                 Categories.Add(category);
+        }
+        private void LoadProducersByCategoryId(int categoryId)
+        {
+            if (categoryId != -2)
+            {
+                Producers.Clear();
+                var producers = _producersRepository.GetAllProducersByCategoryId(categoryId);
+                foreach (var producer in producers)
+                    Producers.Add(producer);
+                OnPropertyChanged("Producers");
+            }
+            else
+                LoadProducers();
         }
         #region Accessors
         public string[] Pathes
@@ -214,7 +228,6 @@ namespace ClientWPF.MVVM.ViewModel
                     _product.CategoryId = SelectedCategory.Id;
                     _product.ProducerId = SelectedProducer.Id;
                     _productsRepository.AddNewProduct(_product);
-
                     if (_product.Pathes?.Count() > 0)
                     {
                         var dbProduct = _productsRepository.GetProductByName(_product.Name);
