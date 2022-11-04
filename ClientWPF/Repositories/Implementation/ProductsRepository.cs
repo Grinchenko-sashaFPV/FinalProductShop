@@ -4,6 +4,7 @@ using ClientWPF.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Data.Entity;
 
 namespace ClientWPF.Repositories.Implementation
 {
@@ -22,7 +23,8 @@ namespace ClientWPF.Repositories.Implementation
 
         public void DeleteProductById(int productId)
         {
-            throw new NotImplementedException();
+            _dbManager.Products.Remove(GetProductById(productId));
+            _dbManager.SaveChanges();
         }
 
         public List<Product> GetAllProducts()
@@ -32,7 +34,7 @@ namespace ClientWPF.Repositories.Implementation
 
         public Product GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            return _dbManager.Products.Find(productId);
         }
 
         public Product GetProductByName(string productName)
@@ -41,27 +43,41 @@ namespace ClientWPF.Repositories.Implementation
         }
         public List<Product> GetProductsByCategoryId(int categoryId)
         {
-            throw new NotImplementedException();
+            return _dbManager.Products.Where(p => p.CategoryId == categoryId).ToList();
         }
 
-        public List<Product> GetProductsByPriceAsc()
+        public List<Product> GetProductsByPriceAsc(int producerId, int categoryId)
         {
-            throw new NotImplementedException();
+            return _dbManager.Products.ThenBy(p => p.Price).Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).ToList();
         }
 
-        public List<Product> GetProductsByPriceDesc()
+        public List<Product> GetProductsByPriceDesc(int producerId, int categoryId)
         {
-            throw new NotImplementedException();
+            return _dbManager.Products.ThenByDescending(p => p.Price).Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).ToList();
+        }
+        public List<Product> GetProductsByProducerAndCategoryId(int producerId, int categoryId)
+        {
+            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).ToList();
         }
 
         public List<Product> GetProductsByProducerId(int producerId)
         {
-            throw new NotImplementedException();
+            return _dbManager.Products.Where(p => p.ProducerId == producerId).ToList();
         }
 
-        public void UpdateProduct(Product product)
+        public void UpdateProduct(Product changedProduct)
         {
-            throw new NotImplementedException();
+            var product = _dbManager.Products.Find(changedProduct.Id);
+            product.Name = changedProduct.Name;
+            product.Price = changedProduct.Price;
+            product.Description = changedProduct.Description;
+            product.Rate = changedProduct.Rate;
+            product.CreationDate = changedProduct.CreationDate;
+            product.Quantity = changedProduct.Quantity;
+            product.ProducerId = changedProduct.ProducerId;
+            product.CategoryId = changedProduct.CategoryId;
+            product.ProductImage = changedProduct.ProductImage;
+            _dbManager.Entry(product).State = EntityState.Modified;
         }
     }
 }

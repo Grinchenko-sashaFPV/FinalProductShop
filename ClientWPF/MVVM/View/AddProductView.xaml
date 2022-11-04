@@ -10,7 +10,7 @@
     <DockPanel>
 
         <WrapPanel DockPanel.Dock="Top">
-            <TextBlock Text="Products"
+            <TextBlock Text="Add new product"
                        Foreground="White"
                        FontSize="30"
                        HorizontalAlignment="Left"
