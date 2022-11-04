@@ -50,10 +50,13 @@ namespace ClientWPF.MVVM.ViewModel
             
             Producers = new ObservableCollection<Producer>();
             Categories = new ObservableCollection<Category>();
+
             // Loading producers and categories for dropdown lists
             LoadProducers();
             LoadCategories();
         }
+
+        #region Selected objects
         public Category SelectedCategory
         {
             get => _selectedCategory;
@@ -73,6 +76,9 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged("SelectedProducer");
             }
         }
+        #endregion
+
+        #region Load data adapter
         private void LoadProducers()
         {
             Producers.Clear();
@@ -100,6 +106,8 @@ namespace ClientWPF.MVVM.ViewModel
             else
                 LoadProducers();
         }
+        #endregion
+
         #region Accessors
         public string[] Pathes
         {
@@ -217,6 +225,7 @@ namespace ClientWPF.MVVM.ViewModel
         }
         #endregion
 
+        #region Commands
         private readonly RelayCommand _addProduct;
         public RelayCommand AddProduct
         {
@@ -255,6 +264,7 @@ namespace ClientWPF.MVVM.ViewModel
                 }));
             }
         }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
