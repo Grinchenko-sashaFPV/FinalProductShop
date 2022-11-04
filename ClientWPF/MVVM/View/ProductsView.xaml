@@ -19,7 +19,7 @@
                        HorizontalAlignment="Left"
                        Margin="5 10"/>
             <ComboBox x:Name="producersList" DockPanel.Dock="Left" Margin="5 0" Width="400" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
-            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="30 0" Width="200" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
+            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="30 0" Width="200" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer, Mode=OneWayToSource}"/>
         </WrapPanel>
         <ScrollViewer Background="#423e5d" Margin="2" Grid.Row="1">
             <ListView x:Name="ListViewProducts" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" >
@@ -34,18 +34,15 @@
                                 Background="#22202f">
                                 <StackPanel Orientation="Vertical">
                                     <DockPanel Height="210">
-                                        <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
-                                            <Border
+                                        <Border
                                                 Width="200" Height="200"
                                                 Padding="0"
                                                 CornerRadius="25"
                                                 BorderThickness="1.6" BorderBrush="Gray">
-                                                <Border.Background>
-                                                    <ImageBrush ImageSource="{Binding ImageBytes, UpdateSourceTrigger=PropertyChanged}"/>
-                                                </Border.Background>
-                                            </Border>
-                                        </Button>
-
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding ImageBytes, UpdateSourceTrigger=PropertyChanged}"/>
+                                            </Border.Background>
+                                        </Border>
                                     </DockPanel>
                                     <StackPanel VerticalAlignment="Center" Margin="0 9">
                                         <TextBlock FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />

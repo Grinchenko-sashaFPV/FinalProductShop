@@ -28,16 +28,6 @@
                     Background="#22202f">
                 <StackPanel Orientation="Vertical">
                     <DockPanel Height="210">
-                        <Button DockPanel.Dock="Right" Width="40" Padding="8,0,2,0" Background="Transparent"
-                                BorderThickness="0"  
-                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                            <Image Source="/Images/Icons/arrow-forward.png"/>
-                        </Button>
-                        <Button DockPanel.Dock="Left" Width="40"  Padding="10,0,0,0" Background="Transparent"
-                                BorderThickness="0"
-                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                            <Image Source="/Images/Icons/arrow-back.png"/>
-                        </Button>
                         <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
                             <Border
                                 Width="200" Height="200"

@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ClientWPF.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
@@ -28,6 +29,7 @@ namespace ClientWPF.MVVM.ViewModel
         private Producer _selectedProducer;
         private Product _selectedProduct;
         private string _starRatesImageSource;
+
         public ProductsViewModel()
         {
             _productsRepository = new ProductsRepository();
@@ -43,10 +45,11 @@ namespace ClientWPF.MVVM.ViewModel
             Categories = new ObservableCollection<Category>();
             Products = new ObservableCollection<Product>();
 
-            LoadProducts();
             LoadProducers();
             LoadCategories();
         }
+
+        #region Selected objects
         public Category SelectedCategory
         {
             get => _selectedCategory;
@@ -74,9 +77,16 @@ namespace ClientWPF.MVVM.ViewModel
             set
             {
                 _selectedProduct = value;
+                ProductDetailsWindow pdw = new ProductDetailsWindow(SelectedProduct);
+                pdw.Title = $"{_selectedProduct.Name} details";
+                pdw.ResizeMode = ResizeMode.CanMinimize;
+                pdw.Show();
                 OnPropertyChanged("SelectedProduct");
             }
         }
+        #endregion
+
+        #region Load data adapter
         private void LoadProducers()
         {
             Producers.Clear();
@@ -153,31 +163,33 @@ namespace ClientWPF.MVVM.ViewModel
             if(producerId != -2 && categoryId != -2)
             {
                 var products = _productsRepository.GetProductsByProducerAndCategoryId(producerId, categoryId);
-                foreach (var product in products) { 
+                foreach (var product in products)
                     Products.Add(product);
-                }
+                OnPropertyChanged("Products");
             }
             else if (producerId == -2 && categoryId != -2)
             {
                 var products = _productsRepository.GetProductsByCategoryId(categoryId);
                 foreach (var product in products)
                     Products.Add(product);
+                OnPropertyChanged("Products");
             }
             else if(producerId != -2 && categoryId == -2)
             {
                 var products = _productsRepository.GetProductsByProducerId(producerId);
                 foreach (var product in products)
                     Products.Add(product);
+                OnPropertyChanged("Products");
             }
             else
                 LoadProducts();
-            OnPropertyChanged("Products");
         }
         private void LoadProducersByCategoryId(int categoryId)
         {
             if (categoryId != -2)
             {
                 Producers.Clear();
+                Producers.Add(new Producer() { Id = -2, Name = "Всі виробники", Rate = -1 });
                 var producers = _producersRepository.GetAllProducersByCategoryId(categoryId);
                 foreach (var producer in producers)
                     Producers.Add(producer);
@@ -186,6 +198,9 @@ namespace ClientWPF.MVVM.ViewModel
             else
                 LoadProducers();
         }
+        #endregion
+
+        #region Star image source adapter & load images func
         public string StarRatesImageSource
         {
             get => _starRatesImageSource;
@@ -199,6 +214,8 @@ namespace ClientWPF.MVVM.ViewModel
         {
             return _productImagesRepository.GetImagesById(productId).ToList();
         }
+        #endregion
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
