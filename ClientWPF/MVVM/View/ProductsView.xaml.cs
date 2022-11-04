@@ -30,5 +30,6 @@ namespace ClientWPF.MVVM.View
             categoriesList.SelectedIndex = 0;
             producersList.SelectedIndex = 0;
         }
+
     }
 }

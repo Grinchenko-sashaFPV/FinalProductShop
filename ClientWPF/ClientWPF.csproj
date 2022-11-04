@@ -47,6 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -96,6 +98,10 @@
     <Compile Include="Migrations\202211031957568_ChangedProductModelMigration.cs" />
     <Compile Include="Migrations\202211031957568_ChangedProductModelMigration.designer.cs">
       <DependentUpon>202211031957568_ChangedProductModelMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211041428359_ProducerCategoryMigration.cs" />
+    <Compile Include="Migrations\202211041428359_ProducerCategoryMigration.designer.cs">
+      <DependentUpon>202211041428359_ProducerCategoryMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModel.cs" />
@@ -168,6 +174,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Theme\CustomComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\MenuButtonTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -214,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211031957568_ChangedProductModelMigration.resx">
       <DependentUpon>202211031957568_ChangedProductModelMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211041428359_ProducerCategoryMigration.resx">
+      <DependentUpon>202211041428359_ProducerCategoryMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -19,6 +19,11 @@ namespace ClientWPF.Repositories.Implementation
             return _dbManager.Producers.ToList();
         }
 
+        public List<Producer> GetAllProducersByCategoryId(int categoryId)
+        {
+            return _dbManager.Producers.Where(p => p.CategoryId == categoryId).ToList();
+        }
+
         public Producer GetProducerByName(string producerName)
         {
             return _dbManager.Producers.Find(producerName);

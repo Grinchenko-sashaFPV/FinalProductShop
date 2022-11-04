@@ -15,8 +15,8 @@
                        FontSize="30"
                        HorizontalAlignment="Left"
                        Margin="5 10"/>
-            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="30 0" Width="200" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
             <ComboBox x:Name="producersList" DockPanel.Dock="Left" Margin="5 0" Width="400" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
+            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="30 0" Width="200" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
         </WrapPanel>
         <StackPanel Orientation="Vertical">
             <Border HorizontalAlignment="Center"

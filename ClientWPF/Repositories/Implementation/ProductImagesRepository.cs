@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace ClientWPF.Repositories.Implementation
 {
@@ -30,13 +32,21 @@ namespace ClientWPF.Repositories.Implementation
                     if(File.Exists(pathes[i]))
                     {
                         buff = File.ReadAllBytes(pathes[i]);
-                        _dbManager.ProductImages.Add(new ProductImage()
+                        Image img = Image.FromFile(pathes[i]);
+                        Bitmap resizedImage = new Bitmap(img, new System.Drawing.Size(256, 256));
+                        using (var stream = new MemoryStream())
                         {
-                            FileExtension = Path.GetExtension(pathes[i]),
-                            Image = buff,
-                            Size = buff.Length,
-                            ProductId = productId
-                        });
+                            resizedImage.Save(stream, ImageFormat.Jpeg);
+                            byte[] bytes = stream.ToArray();
+
+                            _dbManager.ProductImages.Add(new ProductImage()
+                            {
+                                FileExtension = Path.GetExtension(pathes[i]),
+                                Image = bytes,
+                                Size = bytes.Length,
+                                ProductId = productId
+                            });
+                        }
                     }
                 }
                 _dbManager.SaveChanges();

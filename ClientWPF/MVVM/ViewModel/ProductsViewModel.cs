@@ -53,6 +53,7 @@ namespace ClientWPF.MVVM.ViewModel
             set
             {
                 _selectedCategory = value;
+                LoadProducersByCategoryId(SelectedCategory.Id);
                 LoadProductsByProducerAndCategory(SelectedProducer.Id, SelectedCategory.Id);
                 OnPropertyChanged("SelectedCategory");
             }
@@ -171,6 +172,19 @@ namespace ClientWPF.MVVM.ViewModel
             else
                 LoadProducts();
             OnPropertyChanged("Products");
+        }
+        private void LoadProducersByCategoryId(int categoryId)
+        {
+            if (categoryId != -2)
+            {
+                Producers.Clear();
+                var producers = _producersRepository.GetAllProducersByCategoryId(categoryId);
+                foreach (var producer in producers)
+                    Producers.Add(producer);
+                OnPropertyChanged("Producers");
+            }
+            else
+                LoadProducers();
         }
         public string StarRatesImageSource
         {
