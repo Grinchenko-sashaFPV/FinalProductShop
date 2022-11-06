@@ -78,6 +78,7 @@ namespace ClientWPF.Repositories.Implementation
             product.CategoryId = changedProduct.CategoryId;
             product.ProductImage = changedProduct.ProductImage;
             _dbManager.Entry(product).State = EntityState.Modified;
+            _dbManager.SaveChanges();
         }
     }
 }

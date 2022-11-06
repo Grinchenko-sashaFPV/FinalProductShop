@@ -57,7 +57,8 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 _selectedCategory = value;
                 LoadProducersByCategoryId(SelectedCategory.Id);
-                LoadProductsByProducerAndCategory(SelectedProducer.Id, SelectedCategory.Id);
+                if(SelectedProducer != null)
+                    LoadProductsByProducerAndCategory(SelectedProducer.Id, SelectedCategory.Id);
                 OnPropertyChanged("SelectedCategory");
             }
         }
@@ -67,7 +68,8 @@ namespace ClientWPF.MVVM.ViewModel
             set
             {
                 _selectedProducer = value;
-                LoadProductsByProducerAndCategory(SelectedProducer.Id, SelectedCategory.Id);
+                if(SelectedProducer != null)
+                    LoadProductsByProducerAndCategory(SelectedProducer.Id, SelectedCategory.Id);
                 OnPropertyChanged("SelectedProducer");
             }
         }
@@ -77,6 +79,9 @@ namespace ClientWPF.MVVM.ViewModel
             set
             {
                 _selectedProduct = value;
+                var buff_pathes = LoadImagesForProduct(_selectedProduct.Id);
+                    _selectedProduct.ProductImage = buff_pathes.ToList();
+
                 ProductDetailsWindow pdw = new ProductDetailsWindow(SelectedProduct);
                 pdw.Title = $"{_selectedProduct.Name} details";
                 pdw.ResizeMode = ResizeMode.CanMinimize;

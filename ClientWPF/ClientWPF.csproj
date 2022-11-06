@@ -289,6 +289,9 @@
     <Resource Include="Images\StarRates\Star_rating_4_of_5.png" />
     <Resource Include="Images\StarRates\Star_rating_5_of_5.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\details.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
