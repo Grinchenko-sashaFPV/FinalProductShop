@@ -1,7 +1,5 @@
-﻿using ClientWPF.Core;
+﻿using ClientWPF.MVVM.View;
 using ClientWPF.Repositories.Implementation;
-using ClientWPF.Repositories.Interfaces;
-using Microsoft.Win32;
 using ModelsLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -12,11 +10,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    public class AddProductViewModel : INotifyPropertyChanged
+    internal class ProductDetailsViewModel : INotifyPropertyChanged
     {
         private readonly ProductImagesRepository _productImagesRepository;
         private readonly CategoriesRepository _categoriesRepository;
@@ -27,34 +24,51 @@ namespace ClientWPF.MVVM.ViewModel
         private Category _selectedCategory;
         private Producer _selectedProducer;
         private string _starRatesImageSource;
-        
+
         public List<double> RatesValues { get; set; }
         public ObservableCollection<Producer> Producers { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
-
-        public AddProductViewModel(ProductImagesRepository productImagesRepository, CategoriesRepository categoriesRepository,
-            ProducersRepository producersRepository, ProductsRepository productsRepository)
+        public ProductDetailsViewModel() { }
+        public ProductDetailsViewModel(Product product)
         {
-            _productImagesRepository = productImagesRepository;
-            _categoriesRepository = categoriesRepository;
-            _producersRepository = producersRepository;
-            _productsRepository = productsRepository;
+            _productImagesRepository = new ProductImagesRepository();
+            _categoriesRepository = new CategoriesRepository();
+            _producersRepository = new ProducersRepository();
+            _productsRepository = new ProductsRepository();
 
             _selectedCategory = new Category();
             _selectedProducer = new Producer();
 
-            _product = new Product();
+            _product = new Product()
+            {
+                Description = product.Description,
+                Quantity = product.Quantity,
+                CurrentRateSource = product.CurrentRateSource,
+                CategoryId = product.CategoryId,
+                CreationDate = product.CreationDate,
+                Id = product.Id,
+                ImageBytes = product.ImageBytes,
+                Name = product.Name,
+                Pathes = product.Pathes,
+                Price = product.Price,
+                ProductImage = product.ProductImage,
+                Rate = product.Rate,
+                ProducerId = product.ProducerId
+            };
+
 
             _product.Pathes = new List<string>() { "/Images/Icons/defaultProductImage.png" }; // Default image for new product
 
             RatesValues = new List<double>() { 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 };
-            
+
             Producers = new ObservableCollection<Producer>();
             Categories = new ObservableCollection<Category>();
 
             // Loading producers and categories for dropdown lists
             LoadProducers();
             LoadCategories();
+            ProductDetailsView view = new ProductDetailsView();
+            view.Show();
         }
 
         #region Selected objects
@@ -113,7 +127,7 @@ namespace ClientWPF.MVVM.ViewModel
         public string[] Pathes
         {
             get { return _product.Pathes.ToArray(); }
-            set 
+            set
             {
                 _product.Pathes = value;
                 OnPropertyChanged("Pathes");
@@ -161,7 +175,7 @@ namespace ClientWPF.MVVM.ViewModel
             set
             {
                 bool isNormal = (_product.Rate >= 0 && _product.Rate < 6);
-                if(!isNormal)
+                if (!isNormal)
                     MessageBox.Show("Invalid Rate!", "Attention!", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
@@ -215,54 +229,13 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged("CreationDate");
             }
         }
-        public string StarRatesImageSource 
+        public string StarRatesImageSource
         {
             get => _starRatesImageSource;
             set
             {
                 _starRatesImageSource = value;
                 OnPropertyChanged("StarRatesImageSource");
-            }
-        }
-        #endregion
-
-        #region Commands
-        private readonly RelayCommand _addProduct;
-        public RelayCommand AddProduct
-        {
-            get
-            {
-                return _addProduct ?? (new RelayCommand(obj =>
-                {
-                    _product.CreationDate = DateTime.Now;
-                    _product.CategoryId = SelectedCategory.Id;
-                    _product.ProducerId = SelectedProducer.Id;
-                    _productsRepository.AddNewProduct(_product);
-                    if (_product.Pathes?.Count() > 0)
-                    {
-                        var dbProduct = _productsRepository.GetProductByName(_product.Name);
-                        if(dbProduct != null)
-                            _productImagesRepository.AddImages(Pathes, dbProduct.Id);
-                    }
-                    MessageBox.Show($"{_product.Name} was successfully saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                }));
-            }
-        }
-        private readonly RelayCommand _openFileDialog;
-        public RelayCommand OpenFileDialog
-        {
-            get
-            {
-                return _openFileDialog ?? (new RelayCommand(obj =>
-                {
-                    OpenFileDialog ofd = new OpenFileDialog();
-                    ofd.Multiselect = true;
-                    ofd.Title = "Choose your product photos";
-                    ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.apng;*.avif;*.gif;*.jfif;*.pjpeg";
-                    ofd.ShowDialog();
-                    Pathes = ofd.FileNames;
-                    //_productImagesRepository.AddImage(ofd.FileNames);
-                }));
             }
         }
         #endregion

@@ -47,7 +47,7 @@
                     <DockPanel>
                         <TextBlock FontSize="15" DockPanel.Dock="Left" HorizontalAlignment="Center" Width="70" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
                         <TextBlock FontSize="15" DockPanel.Dock="Right" HorizontalAlignment="Center"  Width="70" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
-                        <Image Source="{Binding StarRatesImageSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
+                        <Image Source="{Binding CurrentRateSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
                     </DockPanel>
                     <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
                     <DockPanel>
@@ -69,7 +69,18 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Rate" FontSize="18" Margin="10" Foreground="White"/>
-                    <ComboBox Width="160" Height="29" SelectedIndex="0" ItemsSource="{Binding RatesValues}" SelectedValue="{Binding Rate, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox SelectionChanged="Rates_SelectionChanged" Width="160" x:Name="Rates" Height="29" SelectedIndex="0">
+                        <ComboBoxItem Tag="0.5" Content="0.5"/>
+                        <ComboBoxItem Tag="1" Content="1"/>
+                        <ComboBoxItem Tag="1.5" Content="1.5"/>
+                        <ComboBoxItem Tag="2" Content="2"/>
+                        <ComboBoxItem Tag="2.5" Content="2.5"/>
+                        <ComboBoxItem Tag="3" Content="3"/>
+                        <ComboBoxItem Tag="3.5" Content="3.5"/>
+                        <ComboBoxItem Tag="4" Content="4"/>
+                        <ComboBoxItem Tag="4.5" Content="4.5"/>
+                        <ComboBoxItem Tag="5" Content="5"/>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Quantity" FontSize="18" Margin="10" Foreground="White"/>

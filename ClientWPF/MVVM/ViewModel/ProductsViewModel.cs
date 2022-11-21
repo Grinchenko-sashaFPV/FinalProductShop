@@ -1,5 +1,7 @@
-﻿using ClientWPF.Repositories.Implementation;
+﻿using ClientWPF.MVVM.View;
+using ClientWPF.Repositories.Implementation;
 using ClientWPF.Repositories.Interfaces;
+using ClientWPF.Windows;
 using ModelsLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ClientWPF.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
@@ -29,13 +30,13 @@ namespace ClientWPF.MVVM.ViewModel
         private Producer _selectedProducer;
         private Product _selectedProduct;
         private string _starRatesImageSource;
-
-        public ProductsViewModel()
+        public ProductsViewModel(ProductsRepository productsRepository, ProducersRepository producersRepository,
+            CategoriesRepository categoriesRepository, ProductImagesRepository productImagesRepository)
         {
-            _productsRepository = new ProductsRepository();
-            _producersRepository = new ProducersRepository();
-            _categoriesRepository = new CategoriesRepository();
-            _productImagesRepository = new ProductImagesRepository();
+            _productsRepository = productsRepository;
+            _producersRepository = producersRepository;
+            _categoriesRepository = categoriesRepository;
+            _productImagesRepository = productImagesRepository;
 
             _selectedProducer = new Producer();
             _selectedCategory = new Category();
@@ -81,11 +82,11 @@ namespace ClientWPF.MVVM.ViewModel
                 _selectedProduct = value;
                 var buff_pathes = LoadImagesForProduct(_selectedProduct.Id);
                     _selectedProduct.ProductImage = buff_pathes.ToList();
-
-                ProductDetailsWindow pdw = new ProductDetailsWindow(SelectedProduct);
-                pdw.Title = $"{_selectedProduct.Name} details";
-                pdw.ResizeMode = ResizeMode.CanMinimize;
-                pdw.Show();
+                //
+                ProductDetailsViewModel viewModel = new ProductDetailsViewModel(_selectedProduct);
+                
+                //ProductDetailsWindow productDetailsWindow = new ProductDetailsWindow(_selectedProduct);
+                //productDetailsWindow.Show();
                 OnPropertyChanged("SelectedProduct");
             }
         }

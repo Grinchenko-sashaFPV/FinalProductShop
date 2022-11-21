@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:ClientWPF"
              xmlns:viewModel="clr-namespace:ClientWPF.MVVM.ViewModel"
              xmlns:view="clr-namespace:ClientWPF.MVVM.View"
-             
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -22,9 +21,21 @@
             <DataTemplate DataType="{x:Type viewModel:ProductsViewModel}">
                 <view:ProductsView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModel:AddProductViewModel}">
                 <view:AddProductView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ProductDetailsViewModel}">
+                <view:ProductDetailsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AddCategoryViewModel}">
+                <view:AddCategoryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AddProducerViewModel}">
+                <view:AddProducerView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

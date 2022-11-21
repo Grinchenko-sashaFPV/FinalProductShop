@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ClientWPF.MVVM.View.AddProducerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClientWPF.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <WrapPanel>
+            <TextBlock Text="Add Producer"
+                       Foreground="White"
+                       FontSize="30"
+                       HorizontalAlignment="Left"
+                       Margin="5 10"/>
+        </WrapPanel>
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <WrapPanel>
+                <ComboBox x:Name="categoriesList" Margin="5 0" Width="400" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
+                <ComboBox x:Name="producersList" Margin="5 0" Width="400" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
+            </WrapPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Add"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
