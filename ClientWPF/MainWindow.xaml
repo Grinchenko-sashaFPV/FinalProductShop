@@ -61,14 +61,28 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ProductsViewCommand}"/>
-
+                
                 <RadioButton Content="Add New Product"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AddProductViewCommand}"/>
+
+                <RadioButton Content="Add Category"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AddCategoryViewCommand}"/>
                 
+                <RadioButton Content="Add Producer"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AddProducerViewCommand}"/>
+
                 <RadioButton Content="Profile"
                              Height="50"
                              Foreground="White"

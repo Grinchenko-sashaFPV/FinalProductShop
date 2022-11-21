@@ -5,30 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientWPF.Windows"
         mc:Ignorable="d"
-        Title="ProductDetailsWindow" Height="647" Width="800"
-        Background="AliceBlue">
+        WindowStartupLocation="CenterOwner"
+        Background="#3d3a55"
+        Icon="/Images/Icons/details.ico"
+        Title="Window1" Height="700" Width="800"
+        FontFamily="/Fonts/#Poppins">
     <StackPanel Orientation="Vertical">
         <Border HorizontalAlignment="Center"
                     CornerRadius="10"
+                    Margin="0 30 0 0"
                     BorderThickness="1.6" BorderBrush="DarkOrange"
-                    Width="300"
+                    Width="400"
                     Height="350"
                     Padding="5"
                     Background="#22202f">
             <StackPanel Orientation="Vertical">
                 <DockPanel Height="210">
-                    <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
-                        <Border
+                    <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                                DockPanel.Dock="Left" x:Name="prevImage" Width="30"
+                                Margin="20 0 0 0" Background="Transparent" Click="PrevImage_Click">
+                        <Image Source="/Images/Icons/arrow-back.png"/>
+                    </Button>
+                    <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="NextImage_Click"
+                                DockPanel.Dock="Right" x:Name="nextImage" Width="30"
+                                Margin="0 0 20 0" Background="Transparent">
+                        <Image Source="/Images/Icons/arrow-forward.png" />
+                    </Button>
+                    <Border
                                 Width="200" Height="200"
                                 Padding="0"
                                 CornerRadius="25"
                                 BorderThickness="1.6" BorderBrush="Gray">
-                            <Border.Background>
-                                <ImageBrush ImageSource="{Binding Pathes[0], UpdateSourceTrigger=PropertyChanged}"/>
-                            </Border.Background>
-                        </Border>
-                    </Button>
-
+                        <Border.Background>
+                            <ImageBrush x:Name="imageProduct" ImageSource="/Images/Icons/defaultProductImage.png"/>
+                        </Border.Background>
+                    </Border>
                 </DockPanel>
                 <StackPanel VerticalAlignment="Center" Margin="0 9">
                     <TextBlock FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
@@ -36,7 +47,7 @@
                     <DockPanel>
                         <TextBlock FontSize="15" DockPanel.Dock="Left" HorizontalAlignment="Center" Width="70" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
                         <TextBlock FontSize="15" DockPanel.Dock="Right" HorizontalAlignment="Center"  Width="70" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
-                        <Image Source="{Binding StarRatesImageSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
+                        <Image Source="{Binding CurrentRateSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
                     </DockPanel>
                     <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
                     <DockPanel>
@@ -58,7 +69,18 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Rate" FontSize="18" Margin="10" Foreground="White"/>
-                    <ComboBox Width="160" Height="29" SelectedIndex="0" ItemsSource="{Binding RatesValues}" SelectedValue="{Binding Rate, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox SelectionChanged="Rates_SelectionChanged" Width="160" x:Name="Rates" Height="29" SelectedIndex="0">
+                        <ComboBoxItem Tag="0.5" Content="0.5"/>
+                        <ComboBoxItem Tag="1" Content="1"/>
+                        <ComboBoxItem Tag="1.5" Content="1.5"/>
+                        <ComboBoxItem Tag="2" Content="2"/>
+                        <ComboBoxItem Tag="2.5" Content="2.5"/>
+                        <ComboBoxItem Tag="3" Content="3"/>
+                        <ComboBoxItem Tag="3.5" Content="3.5"/>
+                        <ComboBoxItem Tag="4" Content="4"/>
+                        <ComboBoxItem Tag="4.5" Content="4.5"/>
+                        <ComboBoxItem Tag="5" Content="5"/>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Quantity" FontSize="18" Margin="10" Foreground="White"/>
@@ -66,8 +88,6 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <Button Command="{Binding AddProduct}" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Add"/>
-
+        <Button x:Name="saveChangesButton" Click="saveChangesButton_Click" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Save Changes"/>
     </StackPanel>
-
 </Window>
