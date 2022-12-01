@@ -25,8 +25,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <WrapPanel>
-                <ComboBox x:Name="categoriesList" Margin="5 0" Width="400" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
-                <ComboBox x:Name="producersList" Margin="5 0" Width="400" ItemsSource="{Binding Producers}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
+                <ComboBox x:Name="categoriesList" Margin="5 0" Width="400" ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
+                <ComboBox x:Name="producersList" Margin="5 0" Width="400" ItemsSource="{Binding Producers, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
             </WrapPanel>
             <Grid>
                 <Grid.ColumnDefinitions>

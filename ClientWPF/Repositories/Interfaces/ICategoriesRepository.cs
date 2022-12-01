@@ -8,7 +8,11 @@ namespace ClientWPF.Repositories.Interfaces
         List<Category> GetAllCategories();
         List<Category> GetCategoriesByPopularityAsc();
         List<Category> GetCategoriesByPopularityDesc();
+        List<Category> GetCategoriesByContaintsLetters(string phrase);
         Category GetCategoryById(int categoryId);
         Category GetCategoryByName(string categoryName);
+        int UpdateCategory(Category changedCategory);
+        void DeleteCategory(int categoryId);
+        void AddCategory(Category newCategory);
     }
 }
