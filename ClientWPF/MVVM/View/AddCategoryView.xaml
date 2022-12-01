@@ -4,9 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClientWPF.MVVM.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Loaded="UserControl_Loaded">
+             mc:Ignorable="d" d:DesignWidth="800"
+             Loaded="UserControl_Loaded" Height="737">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -21,25 +20,45 @@
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.8*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                <TextBlock Text="Category name:" Foreground="White"/>
-                <TextBox x:Name="categoryName" Text="{Binding SelectedCategory.Name}"/>
-                <Button Command="{Binding SaveChangedCategory}" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Change Category"/>
+            <TextBlock Margin="0 25 0 0" Text="Here you can do CRUD operations with categories." FontSize="20" HorizontalAlignment="Center" Foreground="#1dc6df"/>
+            <StackPanel Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Center" RenderTransformOrigin="0.239,0.616" Margin="10,10,10,0">
+                <StackPanel  Margin="0 70 0 0">
+                    <TextBlock Text="Category name:" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="categoryName" Text="{Binding SelectedCategory.Name}" Margin="0 10 0 0" FontSize="15pt" Width="300"/>
+                </StackPanel>
+
+                <Button Cursor="Hand" Command="{Binding SaveChangedCategory}" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Change Category"/>
+                <Button Cursor="Hand" Command="{Binding DeleteSelectedCategory}" Style="{StaticResource CustomButtonTemplate}" Background="#ff3a31"  Width="250" Height="40" Content="Delete Category"/>
             </StackPanel>
-            <ListBox Grid.Row="0" Grid.Column="1" x:Name="categoriesList" Margin="5 0" Width="400" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-                <TextBlock Text="Add new category" Foreground="White" HorizontalAlignment="Center"/>
-                <TextBox x:Name="newCategoryName"/>
-                <Button Command="{Binding AddCategory}" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Add Category"/>
+            <TextBox 
+                Grid.Column="1"
+                Width="250"
+                Margin="0 20 0 0"
+                Height="40"
+                VerticalAlignment="Top"
+                FontSize="18"
+                Style="{StaticResource ModernTextBox}"/>
+            <ListBox Grid.Row="1" Grid.Column="1" x:Name="categoriesList" Margin="5 0"
+                     ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" VerticalAlignment="Center"
+                     FontSize="20" SelectedItem="{Binding SelectedCategory}" MinHeight="390" Background="#213349" Foreground="FloralWhite"/>
+            <StackPanel Grid.Row="2">
+                <TextBlock Text="Add new category:" Foreground="White" HorizontalAlignment="Center" FontSize="20"/>
+                <StackPanel>
+                    <TextBox x:Name="newCategoryName" Width="300" FontSize="15pt" Margin="0 10 0 0" Text="{Binding NewNameCategory, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <Button Cursor="Hand" Command="{Binding AddCategory}" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Add Category"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1">
+                <Image Source="../../Images/icon.png" Margin="0 10 0 0" Width="170" Stretch="Uniform"/>
             </StackPanel>
         </Grid>
     </Grid>
-
 </UserControl>

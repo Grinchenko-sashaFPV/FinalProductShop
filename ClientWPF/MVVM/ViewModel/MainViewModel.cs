@@ -54,7 +54,7 @@ namespace ClientWPF.MVVM.ViewModel
             HomeVM = new HomeViewModel();
             ProductsVM = new ProductsViewModel(_productsRepository, _producersRepository, _categoriesRepository, _productImagesRepository);
             AddProductVM = new AddProductViewModel(_productImagesRepository, _categoriesRepository, _producersRepository, _productsRepository);
-            AddCategoryVM = new AddCategoryViewModel(_categoriesRepository);
+            AddCategoryVM = new AddCategoryViewModel(_categoriesRepository, _producersRepository);
             AddProducerVM = new AddProducerViewModel(_categoriesRepository, _producersRepository);
 
             CurrentView = HomeVM;

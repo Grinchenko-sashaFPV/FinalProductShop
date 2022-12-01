@@ -101,14 +101,7 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"/>
             </StackPanel>
-            <WrapPanel HorizontalAlignment="Left" Grid.Column="1" Grid.ColumnSpan="2" Margin="366,0,0,0">
-                <TextBox Width="300"
-                 Height="40"
-                 VerticalAlignment="Top"
-                 HorizontalAlignment="Left"
-                 Margin="10"
-                 FontSize="18"
-                 Style="{StaticResource ModernTextBox}"/>
+            <WrapPanel HorizontalAlignment="Right" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 20 0">
                 <Border
                     Margin="0,5,0,0"
                     Width="70" Height="70"
