@@ -10,6 +10,6 @@ namespace ClientWPF.Repositories.Interfaces
     public interface IProductImagesRepository
     {
         void AddImages(string[] pathes, int productId);
-        IEnumerable<ProductImage> GetImagesById(int productId);
+        IEnumerable<ProductImage> GetImagesByProductId(int productId);
     }
 }

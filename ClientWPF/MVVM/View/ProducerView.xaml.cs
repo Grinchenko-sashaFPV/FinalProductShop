@@ -18,9 +18,9 @@ namespace ClientWPF.MVVM.View
     /// <summary>
     /// Interaction logic for AddProducerView.xaml
     /// </summary>
-    public partial class AddProducerView : UserControl
+    public partial class ProducerView : UserControl
     {
-        public AddProducerView()
+        public ProducerView()
         {
             InitializeComponent();
         }

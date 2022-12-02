@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelsLibrary.Models
 {
+    [Serializable]
     [Table("Categories")]
     public class Category
     {

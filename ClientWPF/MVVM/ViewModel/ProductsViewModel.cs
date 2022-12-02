@@ -1,4 +1,5 @@
-﻿using ClientWPF.MVVM.View;
+﻿using ClientWPF.Core;
+using ClientWPF.MVVM.View;
 using ClientWPF.Repositories.Implementation;
 using ClientWPF.Repositories.Interfaces;
 using ClientWPF.Windows;
@@ -218,7 +219,34 @@ namespace ClientWPF.MVVM.ViewModel
         }
         private List<ProductImage> LoadImagesForProduct(int productId)
         {
-            return _productImagesRepository.GetImagesById(productId).ToList();
+            return _productImagesRepository.GetImagesByProductId(productId).ToList();
+        }
+        #endregion
+        #region Commands
+        private readonly RelayCommand _refreshCategories;
+        public RelayCommand RefreshCategories
+        {
+            get
+            {
+                return _refreshCategories ?? (new RelayCommand(obj =>
+                {
+                    LoadCategories();
+                }));
+            }
+        }
+        private readonly RelayCommand _refreshProducers;
+        public RelayCommand RefreshProducers
+        {
+            get
+            {
+                return _refreshProducers ?? (new RelayCommand(obj =>
+                {
+                    if(_selectedCategory != null)
+                        LoadProducersByCategoryId(_selectedCategory.Id);
+                    else 
+                        LoadProducers();
+                }));
+            }
         }
         #endregion
 

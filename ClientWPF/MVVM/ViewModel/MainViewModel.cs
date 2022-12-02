@@ -23,14 +23,14 @@ namespace ClientWPF.MVVM.ViewModel
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand ProductsViewCommand { get; set; }
         public RelayCommand AddProductViewCommand { get; set; }
-        public RelayCommand AddCategoryViewCommand { get; set; }
-        public RelayCommand AddProducerViewCommand { get; set; }
+        public RelayCommand CategoryViewCommand { get; set; }
+        public RelayCommand ProducerViewCommand { get; set; }
 
         public HomeViewModel HomeVM { get; set; }
         public ProductsViewModel ProductsVM { get; set; }
-        public AddProductViewModel AddProductVM { get; set; }
-        public AddCategoryViewModel AddCategoryVM { get; set; }
-        public AddProducerViewModel AddProducerVM { get; set; }
+        public AddProductViewModel ProductVM { get; set; }
+        public CategoryViewModel CategoryVM { get; set; }
+        public ProducerViewModel ProducerVM { get; set; }
 
         private object _currentView;
         public object CurrentView
@@ -53,17 +53,17 @@ namespace ClientWPF.MVVM.ViewModel
             // ViewModels
             HomeVM = new HomeViewModel();
             ProductsVM = new ProductsViewModel(_productsRepository, _producersRepository, _categoriesRepository, _productImagesRepository);
-            AddProductVM = new AddProductViewModel(_productImagesRepository, _categoriesRepository, _producersRepository, _productsRepository);
-            AddCategoryVM = new AddCategoryViewModel(_categoriesRepository, _producersRepository);
-            AddProducerVM = new AddProducerViewModel(_categoriesRepository, _producersRepository);
+            ProductVM = new AddProductViewModel(_productImagesRepository, _categoriesRepository, _producersRepository, _productsRepository);
+            CategoryVM = new CategoryViewModel(_categoriesRepository, _producersRepository, _productsRepository, _productImagesRepository);
+            ProducerVM = new ProducerViewModel(_categoriesRepository, _producersRepository);
 
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
             ProductsViewCommand = new RelayCommand(o => { CurrentView = ProductsVM; });
-            AddProductViewCommand = new RelayCommand(o => { CurrentView = AddProductVM; });
-            AddCategoryViewCommand = new RelayCommand(o => { CurrentView = AddCategoryVM; });
-            AddProducerViewCommand = new RelayCommand(o => { CurrentView = AddProducerVM; });
+            AddProductViewCommand = new RelayCommand(o => { CurrentView = ProductVM; });
+            CategoryViewCommand = new RelayCommand(o => { CurrentView = CategoryVM; });
+            ProducerViewCommand = new RelayCommand(o => { CurrentView = ProducerVM; });
         }
         public static readonly ICommand CloseCommand =
             new RelayCommand(o => ((Window)o).Close());

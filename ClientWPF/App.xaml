@@ -30,12 +30,12 @@
                 <view:ProductDetailsView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:AddCategoryViewModel}">
-                <view:AddCategoryView/>
+            <DataTemplate DataType="{x:Type viewModel:CategoryViewModel}">
+                <view:CategoryView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:AddProducerViewModel}">
-                <view:AddProducerView/>
+            <DataTemplate DataType="{x:Type viewModel:ProducerViewModel}">
+                <view:ProducerView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

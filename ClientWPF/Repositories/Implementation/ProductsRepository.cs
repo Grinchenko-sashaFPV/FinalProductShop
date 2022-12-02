@@ -27,6 +27,22 @@ namespace ClientWPF.Repositories.Implementation
             _dbManager.SaveChanges();
         }
 
+        public void DeleteProductsByCategoryId(int categoryId)
+        {
+            var products = _dbManager.Products.Where(p => p.CategoryId == categoryId).ToList();
+            foreach (var product in products)
+            {
+                var images = _dbManager.ProductImages.Where(image => image.ProductId == product.Id).ToList();
+                if(images != null)
+                {
+                    foreach (var img in images)
+                        _dbManager.ProductImages.Remove(img);
+                }
+                _dbManager.Products.Remove(product);
+            }
+            _dbManager.SaveChanges();
+        }
+
         public List<Product> GetAllProducts()
         {
             return _dbManager.Products.ToList();
@@ -43,18 +59,19 @@ namespace ClientWPF.Repositories.Implementation
         }
         public List<Product> GetProductsByCategoryId(int categoryId)
         {
-            return _dbManager.Products.Where(p => p.CategoryId == categoryId).ToList();
+            return _dbManager.Products.Where(p => p.Producer.CategoryId == categoryId).ToList();
         }
 
         public List<Product> GetProductsByPriceAsc(int producerId, int categoryId)
         {
-            return _dbManager.Products.ThenBy(p => p.Price).Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).ToList();
+            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).OrderBy(p => p.Price).ToList();
         }
 
         public List<Product> GetProductsByPriceDesc(int producerId, int categoryId)
         {
-            return _dbManager.Products.ThenByDescending(p => p.Price).Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).ToList();
+            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).OrderByDescending(p => p.Price).ToList();
         }
+
         public List<Product> GetProductsByProducerAndCategoryId(int producerId, int categoryId)
         {
             return _dbManager.Products.Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).ToList();

@@ -53,7 +53,7 @@ namespace ClientWPF.Repositories.Implementation
             }
         }
 
-        public IEnumerable<ProductImage> GetImagesById(int productId)
+        public IEnumerable<ProductImage> GetImagesByProductId(int productId)
         {
             return _dbManager.ProductImages.Where(p => p.ProductId == productId);
         }

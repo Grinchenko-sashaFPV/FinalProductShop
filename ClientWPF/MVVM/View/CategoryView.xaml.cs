@@ -18,9 +18,9 @@ namespace ClientWPF.MVVM.View
     /// <summary>
     /// Interaction logic for AddCategoryView.xaml
     /// </summary>
-    public partial class AddCategoryView : UserControl
+    public partial class CategoryView : UserControl
     {
-        public AddCategoryView()
+        public CategoryView()
         {
             InitializeComponent();
         }
