@@ -11,5 +11,6 @@ namespace ClientWPF.Repositories.Interfaces
         List<Producer> GetProducersByRateDesc();
         Producer GetProducersById(int producerId);
         Producer GetProducerByName(string producerName);
+        void DeleteProducersByCategoryId(int categoryId);
     }
 }

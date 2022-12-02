@@ -103,17 +103,15 @@
     <Compile Include="Migrations\202211041428359_ProducerCategoryMigration.designer.cs">
       <DependentUpon>202211041428359_ProducerCategoryMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\ViewModel\AddCategoryViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\AddProducerViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProducerViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProductDetailsViewModel.cs" />
-    <Compile Include="MVVM\View\AddCategoryView.xaml.cs">
-      <DependentUpon>AddCategoryView.xaml</DependentUpon>
+    <Compile Include="MVVM\View\CategoryView.xaml.cs">
+      <DependentUpon>CategoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\AddProducerView.xaml.cs">
-      <DependentUpon>AddProducerView.xaml</DependentUpon>
+    <Compile Include="MVVM\View\ProducerView.xaml.cs">
+      <DependentUpon>ProducerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\AddProductView.xaml.cs">
       <DependentUpon>AddProductView.xaml</DependentUpon>
@@ -129,14 +127,17 @@
     <Compile Include="Repositories\Interfaces\IProducersRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductImagesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductsRepository.cs" />
+    <Compile Include="Windows\CustomMessageBox.xaml.cs">
+      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ProductDetailsWindow.xaml.cs">
       <DependentUpon>ProductDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MVVM\View\AddCategoryView.xaml">
+    <Page Include="MVVM\View\CategoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\AddProducerView.xaml">
+    <Page Include="MVVM\View\ProducerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\CustomMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ProductDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -275,6 +280,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileLibrary\FileLibrary.csproj">
+      <Project>{c344b710-556e-4413-8fd9-93746fac3af1}</Project>
+      <Name>FileLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelsLibrary\ModelsLibrary.csproj">
       <Project>{563b8610-978d-416c-b306-0763137e5e53}</Project>
       <Name>ModelsLibrary</Name>
@@ -319,6 +328,12 @@
   <ItemGroup>
     <Resource Include="Images\icon %281%29.png" />
     <Resource Include="Images\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\refresh_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Buffer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

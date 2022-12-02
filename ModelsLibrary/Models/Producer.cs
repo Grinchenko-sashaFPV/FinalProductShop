@@ -9,6 +9,7 @@ using System.ComponentModel;
 
 namespace ModelsLibrary.Models
 {
+    [Serializable]
     [Table("Producers")]
     public class Producer
     {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModelsLibrary.Models
 {
+    [Serializable]
     [Table("ProductsImages")]
     public class ProductImage
     {

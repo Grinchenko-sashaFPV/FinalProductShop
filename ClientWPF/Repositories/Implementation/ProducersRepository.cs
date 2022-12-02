@@ -14,6 +14,17 @@ namespace ClientWPF.Repositories.Implementation
         {
             _dbManager = new ModelsManager();
         }
+
+        public void DeleteProducersByCategoryId(int categoryId)
+        {
+            foreach (var producer in _dbManager.Producers)
+            {
+                if(producer.CategoryId == categoryId)
+                    _dbManager.Producers.Remove(producer);
+            }
+            _dbManager.SaveChanges();
+        }
+
         public List<Producer> GetAllProducers()
         {
             return _dbManager.Producers.ToList();

@@ -1,6 +1,8 @@
-﻿using ModelsLibrary.Models;
+﻿using ClientWPF.Repositories.Implementation;
+using ModelsLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,44 +11,79 @@ using System.Threading.Tasks;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    public class ProducerViewModel : INotifyPropertyChanged
+    internal class ProducerViewModel : INotifyPropertyChanged
     {
-        private Producer _producer;
-        public ProducerViewModel(Producer producer)
+        private readonly CategoriesRepository _categoriesRepository;
+        private readonly ProducersRepository _producersRepository;
+        public ObservableCollection<Category> Categories { get; set; }
+        public ObservableCollection<Producer> Producers { get; set; }
+        private Category _selectedCategory;
+        private Producer _selectedProducer;
+        public ProducerViewModel(CategoriesRepository categoriesRepository, ProducersRepository producersRepository)
         {
-            _producer = new Producer();
-        }
+            _categoriesRepository = new CategoriesRepository();
+            _producersRepository = new ProducersRepository();
 
-        #region Accessors
-        public int Id
+            Categories = new ObservableCollection<Category>();
+            Producers = new ObservableCollection<Producer>();
+            _selectedCategory = new Category();
+            _selectedProducer = new Producer();
+
+            LoadCategories();
+            LoadProducers();
+        }
+        #region Selected objects
+        public Category SelectedCategory
         {
-            get { return _producer.Id; }
+            get => _selectedCategory;
             set
             {
-                _producer.Id = value;
-                OnPropertyChanged("Id");
+                _selectedCategory = value;
+                OnPropertyChanged("SelectedCategory");
             }
         }
-        public string Name
+        public Producer SelectedProducer
         {
-            get { return _producer.Name; }
+            get => _selectedProducer;
             set
             {
-                _producer.Name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-        public double Popularity
-        {
-            get { return _producer.Rate; }
-            set
-            {
-                _producer.Rate = value;
-                OnPropertyChanged("Rate");
+                _selectedProducer = value;
+                OnPropertyChanged("SelectedProducer");
             }
         }
         #endregion
-
+        #region Load data adapter
+        private void LoadCategories()
+        {
+            Categories.Clear();
+            var categories = _categoriesRepository.GetAllCategories();
+            foreach (var category in categories)
+                Categories.Add(category);
+        }
+        private void LoadProducers()
+        {
+            Producers.Clear();
+            Producers.Add(new Producer() { Id = -2, Name = "Всі виробники", Rate = -1 });
+            var producers = _producersRepository.GetAllProducers();
+            foreach (var producer in producers)
+                Producers.Add(producer);
+        }
+        private void LoadProducersByCategoryId(int categoryId)
+        {
+            if (categoryId != -2)
+            {
+                Producers.Clear();
+                Producers.Add(new Producer() { Id = -2, Name = "Всі виробники", Rate = -1 });
+                var producers = _producersRepository.GetAllProducersByCategoryId(categoryId);
+                foreach (var producer in producers)
+                    Producers.Add(producer);
+                OnPropertyChanged("Producers");
+            }
+            else
+                LoadProducers();
+        }
+        #endregion
+        //
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

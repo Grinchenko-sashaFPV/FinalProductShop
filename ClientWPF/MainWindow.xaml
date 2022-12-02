@@ -69,19 +69,19 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AddProductViewCommand}"/>
 
-                <RadioButton Content="Add Category"
+                <RadioButton Content="Category Manager"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding AddCategoryViewCommand}"/>
-                
-                <RadioButton Content="Add Producer"
+                             Command="{Binding CategoryViewCommand}"/>
+
+                <RadioButton Content="Producer Manager"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding AddProducerViewCommand}"/>
+                             Command="{Binding ProducerViewCommand}"/>
 
                 <RadioButton Content="Profile"
                              Height="50"

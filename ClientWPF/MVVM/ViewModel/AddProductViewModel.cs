@@ -227,6 +227,31 @@ namespace ClientWPF.MVVM.ViewModel
         #endregion
 
         #region Commands
+        private readonly RelayCommand _refreshCategories;
+        public RelayCommand RefreshCategories
+        {
+            get
+            {
+                return _refreshCategories ?? (new RelayCommand(obj =>
+                {
+                    LoadCategories();
+                }));
+            }
+        }
+        private readonly RelayCommand _refreshProducers;
+        public RelayCommand RefreshProducers
+        {
+            get
+            {
+                return _refreshProducers ?? (new RelayCommand(obj =>
+                {
+                    if (_selectedCategory != null)
+                        LoadProducersByCategoryId(_selectedCategory.Id);
+                    else
+                        LoadProducers();
+                }));
+            }
+        }
         private readonly RelayCommand _addProduct;
         public RelayCommand AddProduct
         {
