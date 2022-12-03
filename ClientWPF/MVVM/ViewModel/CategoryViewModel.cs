@@ -154,6 +154,7 @@ namespace ClientWPF.MVVM.ViewModel
                                 {
                                     foreach (var product in productsList)
                                     {
+                                        // TODO !!! CHECK Images, smth can be not working!
                                         // Get images of that products and add them to product
                                         var imagesOfProduct = _productsImagesRepository.GetImagesByProductId(product.Id);
                                         if(imagesOfProduct.ToList().Count > 0)
