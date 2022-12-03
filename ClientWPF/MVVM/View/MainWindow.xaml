@@ -1,12 +1,12 @@
-﻿<Window x:Class="ClientWPF.MainWindow"
+﻿<Window x:Class="ClientWPF.MVVM.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:ClientWPF.MVVM.ViewModel"
-        xmlns:local="clr-namespace:ClientWPF"
+        xmlns:local="clr-namespace:ClientWPF.MVVM.View"
         mc:Ignorable="d"
-        Icon="/Images/Icons/favicon.ico"
+        Icon="../../Images/Icons/favicon.ico"
         Title="MainWindow"
         Height="800" Width="1300"
         WindowStyle="None"
@@ -32,7 +32,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Image 
-                Source="/Images/Icons/icon-48.png"
+                Source="../../Images/Icons/icon-48.png"
                 HorizontalAlignment="Left"
                 Width="55px"
                 Height="55px"
@@ -67,6 +67,7 @@
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
+                             Visibility="{Binding AdminOrUser}"
                              Command="{Binding AddProductViewCommand}"/>
 
                 <RadioButton Content="Category Manager"
@@ -74,6 +75,7 @@
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
+                             Visibility="{Binding AdminOrUser}"
                              Command="{Binding CategoryViewCommand}"/>
 
                 <RadioButton Content="Producer Manager"
@@ -81,6 +83,7 @@
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
+                             Visibility="{Binding AdminOrUser}"
                              Command="{Binding ProducerViewCommand}"/>
 
                 <RadioButton Content="Profile"
@@ -109,14 +112,14 @@
                     BorderThickness="1.6" BorderBrush="Gray"
                     Grid.Column="1" HorizontalAlignment="Right">
                     <Border.Background>
-                        <ImageBrush ImageSource="/Images/user-profile.jpg"/>
+                        <ImageBrush ImageSource="../../Images/user-profile.jpg"/>
                     </Border.Background>
                 </Border>
                 <TextBlock Grid.Column="1" x:Name="UserName"
                            HorizontalAlignment="Right"
                            Height="34" Margin="15,0,20,0" 
                            VerticalAlignment="Center" 
-                           FontSize="23" Foreground="White">UserName</TextBlock>
+                           FontSize="23" Foreground="White" Text="{Binding CurrentUser.Name, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button
                     Width="40px"
                     Height="40px"
@@ -125,7 +128,7 @@
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
                                        AncestorType={x:Type Window}}}">
                     <Image 
-                    Source="/Images/Icons/close-icon.png"
+                    Source="../../Images/Icons/close-icon.png"
                     HorizontalAlignment="Left"
                     />
                 </Button>

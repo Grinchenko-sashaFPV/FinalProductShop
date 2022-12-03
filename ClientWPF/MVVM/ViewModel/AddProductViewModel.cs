@@ -260,7 +260,6 @@ namespace ClientWPF.MVVM.ViewModel
                 return _addProduct ?? (new RelayCommand(obj =>
                 {
                     _product.CreationDate = DateTime.Now;
-                    _product.CategoryId = SelectedCategory.Id;
                     _product.ProducerId = SelectedProducer.Id;
                     _productsRepository.AddNewProduct(_product);
                     if (_product.Pathes?.Count() > 0)

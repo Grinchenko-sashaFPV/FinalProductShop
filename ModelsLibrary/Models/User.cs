@@ -9,8 +9,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelsLibrary.Models
 {
     [Serializable]
-    [Table("Categories")]
-    public class Category
+    [Table("Users")]
+    public class User
     {
         [Key]
         public int Id { get; set; }
@@ -18,10 +18,11 @@ namespace ModelsLibrary.Models
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(100)]
         public string Name { get; set; }
-
         [Required(ErrorMessage = "{0} is required")]
-        public double Popularity { get; set; }
-
-        public IEnumerable<Producer> Producers { get; set; }
+        [StringLength(50)] // MAX length of md5 generators string is 32
+        public string Password { get; set; }
+        [ForeignKey("Role")]
+        public int RoleId { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

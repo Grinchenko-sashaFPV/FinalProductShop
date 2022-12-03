@@ -41,9 +41,6 @@ namespace ModelsLibrary.Models
         [ForeignKey("Producer")]
         public int ProducerId { get; set; }
         public virtual Producer Producer { get; set; }
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
 
         public IEnumerable<ProductImage> ProductImage { get; set; }
 

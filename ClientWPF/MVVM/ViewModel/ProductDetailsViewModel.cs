@@ -44,7 +44,6 @@ namespace ClientWPF.MVVM.ViewModel
                 Description = product.Description,
                 Quantity = product.Quantity,
                 CurrentRateSource = product.CurrentRateSource,
-                CategoryId = product.CategoryId,
                 CreationDate = product.CreationDate,
                 Id = product.Id,
                 ImageBytes = product.ImageBytes,

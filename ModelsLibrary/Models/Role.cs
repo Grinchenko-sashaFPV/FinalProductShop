@@ -9,8 +9,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelsLibrary.Models
 {
     [Serializable]
-    [Table("Categories")]
-    public class Category
+    [Table("Roles")]
+    public class Role
     {
         [Key]
         public int Id { get; set; }
@@ -19,9 +19,6 @@ namespace ModelsLibrary.Models
         [StringLength(100)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "{0} is required")]
-        public double Popularity { get; set; }
-
-        public IEnumerable<Producer> Producers { get; set; }
+        public IEnumerable<User> Users { get; set; }
     }
 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelsLibrary", "ModelsLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileLibrary", "FileLibrary\FileLibrary.csproj", "{C344B710-556E-4413-8FD9-93746FAC3AF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashGenerators", "HashGenerators\HashGenerators.csproj", "{98E26B19-6889-45E3-92F3-C1347B868B58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C344B710-556E-4413-8FD9-93746FAC3AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C344B710-556E-4413-8FD9-93746FAC3AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C344B710-556E-4413-8FD9-93746FAC3AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E26B19-6889-45E3-92F3-C1347B868B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E26B19-6889-45E3-92F3-C1347B868B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E26B19-6889-45E3-92F3-C1347B868B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E26B19-6889-45E3-92F3-C1347B868B58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
