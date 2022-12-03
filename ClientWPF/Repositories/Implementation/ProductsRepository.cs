@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Data.Entity;
+using System.Windows.Forms;
 
 namespace ClientWPF.Repositories.Implementation
 {
@@ -29,7 +30,7 @@ namespace ClientWPF.Repositories.Implementation
 
         public void DeleteProductsByCategoryId(int categoryId)
         {
-            var products = _dbManager.Products.Where(p => p.CategoryId == categoryId).ToList();
+            var products = _dbManager.Products.Where(p => p.Producer.CategoryId == categoryId).ToList();
             foreach (var product in products)
             {
                 var images = _dbManager.ProductImages.Where(image => image.ProductId == product.Id).ToList();
@@ -59,22 +60,22 @@ namespace ClientWPF.Repositories.Implementation
         }
         public List<Product> GetProductsByCategoryId(int categoryId)
         {
-            return _dbManager.Products.Where(p => p.Producer.CategoryId == categoryId).ToList();
+            return _dbManager.Products.Where(_p => _p.Producer.CategoryId == categoryId).ToList();
         }
 
         public List<Product> GetProductsByPriceAsc(int producerId, int categoryId)
         {
-            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).OrderBy(p => p.Price).ToList();
+            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.Producer.CategoryId == categoryId).OrderBy(p => p.Price).ToList();
         }
 
         public List<Product> GetProductsByPriceDesc(int producerId, int categoryId)
         {
-            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).OrderByDescending(p => p.Price).ToList();
+            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.Producer.CategoryId == categoryId).OrderByDescending(p => p.Price).ToList();
         }
 
         public List<Product> GetProductsByProducerAndCategoryId(int producerId, int categoryId)
         {
-            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.CategoryId == categoryId).ToList();
+            return _dbManager.Products.Where(p => p.ProducerId == producerId && p.Producer.CategoryId == categoryId).ToList();
         }
 
         public List<Product> GetProductsByProducerId(int producerId)
@@ -92,7 +93,6 @@ namespace ClientWPF.Repositories.Implementation
             product.CreationDate = changedProduct.CreationDate;
             product.Quantity = changedProduct.Quantity;
             product.ProducerId = changedProduct.ProducerId;
-            product.CategoryId = changedProduct.CategoryId;
             product.ProductImage = changedProduct.ProductImage;
             _dbManager.Entry(product).State = EntityState.Modified;
             _dbManager.SaveChanges();

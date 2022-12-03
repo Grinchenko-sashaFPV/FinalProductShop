@@ -1,5 +1,6 @@
 ﻿using ClientWPF.Core;
 using ClientWPF.Repositories.Implementation;
+using ClientWPF.Repositories.Interfaces;
 using Microsoft.Win32;
 using ModelsLibrary.Models;
 using System;
@@ -31,7 +32,8 @@ namespace ClientWPF.MVVM.ViewModel
         public AddProductViewModel ProductVM { get; set; }
         public CategoryViewModel CategoryVM { get; set; }
         public ProducerViewModel ProducerVM { get; set; }
-
+        public AccountViewModel AccountVM { get; set; }
+        #region
         private object _currentView;
         public object CurrentView
         {
@@ -42,9 +44,35 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public MainViewModel()
+        private User _currentUser;
+        public User CurrentUser
         {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+            }
+        }
+        private Visibility _adminOrUser;
+        public Visibility AdminOrUser
+        {
+            get { return _adminOrUser; }
+            set
+            {
+                _adminOrUser = value;
+                OnPropertyChanged(nameof(AdminOrUser));
+            }
+        }
+        #endregion
+        public MainViewModel() {}
+        public MainViewModel(User user)
+        {
+            CurrentUser = new User() { Name = user.Name, Id = user.Id, Password = user.Password, Role = user.Role, RoleId = user.RoleId };
+            if (CurrentUser.Role.Name == "Admin")
+                AdminOrUser = Visibility.Visible;
+            else
+                AdminOrUser = Visibility.Collapsed;
             // Repositories
             _categoriesRepository = new CategoriesRepository();
             _producersRepository = new ProducersRepository();

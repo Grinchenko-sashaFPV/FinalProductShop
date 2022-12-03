@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ClientWPF"
              xmlns:viewModel="clr-namespace:ClientWPF.MVVM.ViewModel"
              xmlns:view="clr-namespace:ClientWPF.MVVM.View"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MVVM/View/AuthorizationWindow.xaml"><!--AuthorizationWindow-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

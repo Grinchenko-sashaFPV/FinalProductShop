@@ -45,7 +45,6 @@ namespace ClientWPF.Windows
                 Id = product.Id,
                 Name = product.Name,
                 CurrentRateSource = product.CurrentRateSource,
-                CategoryId = product.CategoryId,
                 CreationDate = product.CreationDate,
                 Description = product.Description,
                 ImageBytes = product.ImageBytes
