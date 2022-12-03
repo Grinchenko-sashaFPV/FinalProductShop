@@ -15,6 +15,12 @@ namespace ClientWPF.Repositories.Implementation
             _dbManager = new ModelsManager();
         }
 
+        public void AddProducer(Producer newProducer)
+        {
+            _dbManager.Producers.Add(newProducer);
+            _dbManager.SaveChanges();
+        }
+
         public void DeleteProducersByCategoryId(int categoryId)
         {
             foreach (var producer in _dbManager.Producers)
@@ -40,6 +46,11 @@ namespace ClientWPF.Repositories.Implementation
             return _dbManager.Producers.Find(producerName);
         }
 
+        public List<Producer> GetProducersByContaintsLetters(string phrase)
+        {
+            return _dbManager.Producers.Where(p => p.Name.Contains(phrase)).ToList();
+        }
+
         public Producer GetProducersById(int producerId)
         {
             return _dbManager.Producers.Find(producerId);
@@ -53,6 +64,12 @@ namespace ClientWPF.Repositories.Implementation
         public List<Producer> GetProducersByRateDesc()
         {
             return _dbManager.Producers.OrderByDescending(p => p.Rate).ToList();
+        }
+
+        public int UpdateProducer(Producer changedProducer)
+        {
+            _dbManager.Producers.Find(changedProducer.Id).Name = changedProducer.Name;
+            return _dbManager.SaveChanges();
         }
     }
 }

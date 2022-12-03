@@ -12,7 +12,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <WrapPanel>
-            <TextBlock Text="Add Category"
+            <TextBlock Text="Category Manager"
                        Foreground="White"
                        FontSize="30"
                        HorizontalAlignment="Left"

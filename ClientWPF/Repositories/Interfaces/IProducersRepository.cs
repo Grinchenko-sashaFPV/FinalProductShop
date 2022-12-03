@@ -9,8 +9,11 @@ namespace ClientWPF.Repositories.Interfaces
         List<Producer> GetAllProducersByCategoryId(int categoryId);
         List<Producer> GetProducersByRateAsc();
         List<Producer> GetProducersByRateDesc();
+        List<Producer> GetProducersByContaintsLetters(string phrase);
         Producer GetProducersById(int producerId);
         Producer GetProducerByName(string producerName);
         void DeleteProducersByCategoryId(int categoryId);
+        void AddProducer(Producer newProducer);
+        int UpdateProducer(Producer changedProducer);
     }
 }
