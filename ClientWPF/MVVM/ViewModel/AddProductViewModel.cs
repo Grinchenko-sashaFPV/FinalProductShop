@@ -16,7 +16,7 @@ using System.Windows.Data;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    public class AddProductViewModel : INotifyPropertyChanged
+    internal class AddProductViewModel : ObservableObject
     {
         private readonly ProductImagesRepository _productImagesRepository;
         private readonly CategoriesRepository _categoriesRepository;
@@ -291,10 +291,5 @@ namespace ClientWPF.MVVM.ViewModel
         }
         #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

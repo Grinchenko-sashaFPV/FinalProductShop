@@ -1,4 +1,5 @@
-﻿using ClientWPF.MVVM.View;
+﻿using ClientWPF.Core;
+using ClientWPF.MVVM.View;
 using ClientWPF.Repositories.Implementation;
 using ModelsLibrary.Models;
 using System;
@@ -13,7 +14,7 @@ using System.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class ProductDetailsViewModel : INotifyPropertyChanged
+    internal class ProductDetailsViewModel : ObservableObject
     {
         private readonly ProductImagesRepository _productImagesRepository;
         private readonly CategoriesRepository _categoriesRepository;
@@ -238,11 +239,5 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

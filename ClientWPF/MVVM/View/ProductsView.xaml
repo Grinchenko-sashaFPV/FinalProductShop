@@ -73,10 +73,7 @@
                                             <Image Source="{Binding CurrentRateSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
                                         </DockPanel>
                                         <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
-                                        <DockPanel>
-                                            <TextBlock DockPanel.Dock="Left" Width="142" Foreground="AliceBlue" Text="{Binding Category.Name, UpdateSourceTrigger=PropertyChanged}" />
-                                            <TextBlock TextAlignment="Right" DockPanel.Dock="Right" Width="142" Foreground="AliceBlue" Text="{Binding Producer.Name, UpdateSourceTrigger=PropertyChanged}" />
-                                        </DockPanel>
+                                        <TextBlock TextAlignment="Center" Width="142" Foreground="AliceBlue" Text="{Binding Producer.Name, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

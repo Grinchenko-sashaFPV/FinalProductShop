@@ -27,7 +27,6 @@ namespace ClientWPF.Repositories.Implementation
         {
             return await _dbManager.Users.Where(user => user.Name == userName).FirstOrDefaultAsync();
         }
-
         public void UpdateUser(User changedUser)
         {
             throw new NotImplementedException();

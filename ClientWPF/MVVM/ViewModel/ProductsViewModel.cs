@@ -16,7 +16,7 @@ using System.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class ProductsViewModel
+    internal class ProductsViewModel : ObservableObject
     {
         private readonly ProductsRepository _productsRepository;
         private readonly ProducersRepository _producersRepository;
@@ -249,11 +249,5 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

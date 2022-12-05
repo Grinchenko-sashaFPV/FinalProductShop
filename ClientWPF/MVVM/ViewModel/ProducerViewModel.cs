@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class ProducerViewModel : INotifyPropertyChanged
+    internal class ProducerViewModel : ObservableObject
     {
         private readonly CategoriesRepository _categoriesRepository;
         private readonly ProducersRepository _producersRepository;
@@ -230,12 +230,5 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
-        //
-        //
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

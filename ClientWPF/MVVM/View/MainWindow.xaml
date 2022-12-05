@@ -53,14 +53,16 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding HomeViewCommand}"/>
+                             Command="{Binding HomeViewCommand}"
+                             Cursor="Hand"/>
 
                 <RadioButton Content="Products"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding ProductsViewCommand}"/>
+                             Command="{Binding ProductsViewCommand}"
+                             Cursor="Hand"/>
                 
                 <RadioButton Content="Add New Product"
                              Height="50"
@@ -68,7 +70,8 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Visibility="{Binding AdminOrUser}"
-                             Command="{Binding AddProductViewCommand}"/>
+                             Command="{Binding AddProductViewCommand}"
+                             Cursor="Hand"/>
 
                 <RadioButton Content="Category Manager"
                              Height="50"
@@ -76,7 +79,8 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Visibility="{Binding AdminOrUser}"
-                             Command="{Binding CategoryViewCommand}"/>
+                             Command="{Binding CategoryViewCommand}"
+                             Cursor="Hand"/>
 
                 <RadioButton Content="Producer Manager"
                              Height="50"
@@ -84,25 +88,30 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Visibility="{Binding AdminOrUser}"
-                             Command="{Binding ProducerViewCommand}"/>
+                             Command="{Binding ProducerViewCommand}"
+                             Cursor="Hand"/>
 
                 <RadioButton Content="Profile"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Cursor="Hand"/>
 
                 <RadioButton Content="Saved"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Cursor="Hand"/>
 
                 <RadioButton Content="Exit"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SignOut}"
+                             Cursor="Hand"/>
             </StackPanel>
             <WrapPanel HorizontalAlignment="Right" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 20 0">
                 <Border
@@ -112,7 +121,7 @@
                     BorderThickness="1.6" BorderBrush="Gray"
                     Grid.Column="1" HorizontalAlignment="Right">
                     <Border.Background>
-                        <ImageBrush ImageSource="../../Images/user-profile.jpg"/>
+                        <ImageBrush ImageSource="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border.Background>
                 </Border>
                 <TextBlock Grid.Column="1" x:Name="UserName"

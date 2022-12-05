@@ -16,7 +16,7 @@ using FileLibrary;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class CategoryViewModel : INotifyPropertyChanged
+    internal class CategoryViewModel : ObservableObject
     {
         private readonly CategoriesRepository _categoriesRepository;
         private readonly ProducersRepository _producerRepository;
@@ -216,11 +216,5 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
-        //
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }
