@@ -9,6 +9,7 @@
         Background="#3d3a55"
         Icon="/Images/Icons/details.ico"
         Title="Window1" Height="700" Width="800"
+        ResizeMode="NoResize"
         FontFamily="/Fonts/#Poppins">
     <StackPanel Orientation="Vertical">
         <Border HorizontalAlignment="Center"
@@ -34,10 +35,10 @@
                     <Border
                                 Width="200" Height="200"
                                 Padding="0"
-                                CornerRadius="25"
+                                CornerRadius="10"
                                 BorderThickness="1.6" BorderBrush="Gray">
                         <Border.Background>
-                            <ImageBrush x:Name="imageProduct" ImageSource="/Images/Icons/defaultProductImage.png"/>
+                            <ImageBrush Stretch="Fill" x:Name="imageProduct" ImageSource="/Images/Icons/defaultProductImage.png"/>
                         </Border.Background>
                     </Border>
                 </DockPanel>
@@ -59,13 +60,13 @@
         </Border>
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="Name" FontSize="18" Margin="5 5 0 0" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Width="500" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="Name"  HorizontalAlignment="Left" Width="500" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Description" FontSize="18" Margin="5 5 0 0" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Width="500" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="Description" HorizontalAlignment="Left" Width="500" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Price" FontSize="18" Margin="10" Foreground="White"/>
-                    <TextBox Width="160" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="Price" Width="160" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Rate" FontSize="18" Margin="10" Foreground="White"/>
@@ -84,7 +85,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Quantity" FontSize="18" Margin="10" Foreground="White"/>
-                    <TextBox Width="160" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="Quantity" Width="160" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

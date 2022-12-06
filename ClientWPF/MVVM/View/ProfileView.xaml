@@ -7,6 +7,40 @@
              mc:Ignorable="d" 
              d:DesignHeight="705" d:DesignWidth="955">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <WrapPanel>
+            <TextBlock Text="My profile"
+                       Foreground="White"
+                       FontSize="30"
+                       HorizontalAlignment="Left"
+                       Margin="5 10"/>
+        </WrapPanel>
+        <DockPanel Grid.Row="1">
+            <StackPanel DockPanel.Dock="Top" Margin="0 30 0 0">
+                <Button Background="Transparent" Command="{Binding OpenFileDialog}" Width="200" >
+                    <Border Height="200"
+                                    Width="200"
+                                    Padding="3 0 3 0"
+                                    CornerRadius="100"
+                                BorderThickness="1.6" BorderBrush="Gray">
+                        <Border.Background>
+                            <ImageBrush Stretch="Fill" ImageSource="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border.Background>
+                    </Border>
+                </Button>
+                <Label Content="Change my photo here" Foreground="White" HorizontalAlignment="Center" FontSize="13"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Name:" FontSize="18" Margin="5 5 0 0" Foreground="White"/>
+                <TextBox x:Name="NewName"  HorizontalAlignment="Left" Width="500" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Password:" FontSize="18" Margin="5 5 0 0" Foreground="White"/>
+                <TextBox x:Name="NewPassword" HorizontalAlignment="Left" Width="500" Padding="5" Margin="5 0" Foreground="Black" Text="{Binding NewPassword, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Command="{Binding SaveSettings}" Style="{StaticResource CustomButtonTemplate}" Margin="0 20" Width="250" Height="40" Content="Save changed settings"/>
+                <Button Command="{Binding DeleteAccount}" Style="{StaticResource CustomButtonTemplate}" Margin="0 10 0 0" Width="250" Height="40" Background="#ff3a31" Content="DELETE my account"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

@@ -4,9 +4,11 @@ using ModelsLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClientWPF.Repositories.Implementation
 {
@@ -23,13 +25,26 @@ namespace ClientWPF.Repositories.Implementation
             return await _dbManager.SaveChangesAsync();
         }
 
-        public async Task<User> FindUserByName(string userName)
+        public void DeleteUser(int userId)
         {
-            return await _dbManager.Users.Where(user => user.Name == userName).FirstOrDefaultAsync();
+            var user = _dbManager.Users.Find(userId);
+            if(user != null)
+                _dbManager.Users.Remove(user);
+            _dbManager.SaveChanges();
+        }
+
+        public User FindUserByName(string userName)
+        {
+            return  _dbManager.Users.Where(user => user.Name == userName).FirstOrDefault();
         }
         public void UpdateUser(User changedUser)
         {
-            throw new NotImplementedException();
+            var user = _dbManager.Users.Find(changedUser.Id);
+            if(user != null)
+            {
+                _dbManager.Users.AddOrUpdate(changedUser);
+                _dbManager.SaveChanges();
+            }
         }
     }
 }

@@ -33,7 +33,8 @@ namespace ClientWPF.Repositories.Implementation
             var products = _dbManager.Products.Where(p => p.Producer.CategoryId == categoryId).ToList();
             foreach (var product in products)
             {
-                var images = _dbManager.ProductImages.Where(image => image.ProductId == product.Id).ToList();
+                var images = _dbManager.ProductImages
+                    .Where(image => image.ProductId == product.Id).ToList();
                 if(images != null)
                 {
                     foreach (var img in images)

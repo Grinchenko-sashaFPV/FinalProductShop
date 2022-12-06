@@ -96,6 +96,7 @@
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ProfileViewCommand}"
                              Cursor="Hand"/>
 
                 <RadioButton Content="Saved"
@@ -133,7 +134,7 @@
                     Width="40px"
                     Height="40px"
                     Background="Transparent"
-                    Command="{x:Static viewModel:MainViewModel.CloseCommand}"
+                    Command="{Binding CloseCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
                                        AncestorType={x:Type Window}}}">
                     <Image 

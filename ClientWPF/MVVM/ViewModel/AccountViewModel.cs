@@ -81,7 +81,7 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 return _signIn ?? (new RelayCommand(async obj =>
                 {
-                    User user = await _usersRepository.FindUserByName(Name);
+                    User user = _usersRepository.FindUserByName(Name);
                     if (user != null && attempts > 0)
                     {
                         

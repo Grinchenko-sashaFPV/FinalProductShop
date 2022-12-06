@@ -284,8 +284,8 @@ namespace ClientWPF.MVVM.ViewModel
                     ofd.Title = "Choose your product photos";
                     ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.apng;*.avif;*.gif;*.jfif;*.pjpeg";
                     ofd.ShowDialog();
-                    Pathes = ofd.FileNames;
-                    //_productImagesRepository.AddImage(ofd.FileNames);
+                    if (ofd.FileNames.Count() > 0 || ofd.FileName.Count() > 0)
+                        Pathes = ofd.FileNames;
                 }));
             }
         }

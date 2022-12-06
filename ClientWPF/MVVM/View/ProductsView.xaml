@@ -54,13 +54,12 @@
                                 Background="#22202f">
                                 <StackPanel Orientation="Vertical">
                                     <DockPanel Height="210">
-                                        <Border
-                                                Width="200" Height="200"
-                                                Padding="0"
-                                                CornerRadius="25"
+                                        <Border Height="200"
+                                                Padding="3 0 3 0"
+                                                CornerRadius="10"
                                                 BorderThickness="1.6" BorderBrush="Gray">
                                             <Border.Background>
-                                                <ImageBrush ImageSource="{Binding ImageBytes, UpdateSourceTrigger=PropertyChanged}"/>
+                                                <ImageBrush Stretch="Fill" ImageSource="{Binding ImageBytes, UpdateSourceTrigger=PropertyChanged}"/>
                                             </Border.Background>
                                         </Border>
                                     </DockPanel>

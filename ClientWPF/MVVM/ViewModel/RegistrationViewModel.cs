@@ -164,8 +164,8 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 return _signUp ?? (new RelayCommand(async obj =>
                 {
-                    if (String.IsNullOrWhiteSpace(Name))
-                        MessageBox.Show("Please, input correct name!");
+                    if (!_regexForUsername.IsMatch(Name) || String.IsNullOrWhiteSpace(Name))
+                        MessageBox.Show("Input correct Name!");
                     else if (String.IsNullOrWhiteSpace(Password))
                         MessageBox.Show("Please, input correct password!");
                     else if (Password != Password2)
@@ -174,41 +174,50 @@ namespace ClientWPF.MVVM.ViewModel
                         MessageBox.Show("Password is too weak!");
                     else
                     {
-                        User newUser = new User()
-                        {
-                            Name = Name,
-                            Password = MD5Generator.ProduceMD5Hash(Password),
-                            RegistrationDate = DateTime.Now
-                        };
-                        if (IsAdmin && SecretPhrase.ToUpper() == "Я ЛЮБЛЮ ГРІНЧЕНКО!")
-                            newUser.RoleId = 1; // Admin
-                        else if(IsAdmin && SecretPhrase.ToUpper() != "Я ЛЮБЛЮ ГРІНЧЕНКО!")
-                        {
-                            MessageBox.Show("No, you are not admin!");
-                            newUser.RoleId = 2; // User
-                        }
-                        else 
-                            newUser.RoleId = 2; // User
-                        int okay = await _usersRepository.AddUser(newUser);
-                        if (okay == 1 )
-                        {
-                            User addedUser = await _usersRepository.FindUserByName(Name);
-                            if (ImagePath != @"../../Images/defUser.png")
-                            {
-                                _userImagesRepository.AddImageByUserId(ImagePath, addedUser.Id);
-                            }
-                            if(newUser.RoleId == 2)
-                            {
-                                BankAccount ba = new BankAccount();
-                                ba.UserId = addedUser.Id;
-                                ba.MoneyAmount = 10000;
-                                _bankAccountsRepository.AddBankAccount(ba);
-                                MessageBox.Show($"{newUser.Name} was successfully added! We gave you 10000 ₴ for your first deposit.");
-                            }
-                        }
+                        User userWithEqualName = _usersRepository.FindUserByName(Name);
+                        if (userWithEqualName != null)
+                            MessageBox.Show($"User with name -> {Name} was already registered! Try to change your username.");
                         else
-                            MessageBox.Show($"{newUser.Name} as admin was successfully added!");
-                        App.Current.Windows[1].Close();
+                        {
+                            User newUser = new User()
+                            {
+                                Name = Name,
+                                Password = MD5Generator.ProduceMD5Hash(Password),
+                                RegistrationDate = DateTime.Now
+                            };
+                            if (IsAdmin && SecretPhrase.ToUpper() == "Я ЛЮБЛЮ ГРІНЧЕНКО!")
+                                newUser.RoleId = 1; // Admin
+                            else if (IsAdmin && SecretPhrase.ToUpper() != "Я ЛЮБЛЮ ГРІНЧЕНКО!")
+                            {
+                                MessageBox.Show("No, you are not admin!");
+                                newUser.RoleId = 2; // User
+                            }
+                            else
+                                newUser.RoleId = 2; // User
+                            int okay = await _usersRepository.AddUser(newUser);
+                            if (okay == 1)
+                            {
+                                User addedUser = _usersRepository.FindUserByName(Name);
+                                if (ImagePath != @"../../Images/defUser.png")
+                                {
+                                    _userImagesRepository.AddImageByUserId(ImagePath, addedUser.Id);
+                                }
+                                if (newUser.RoleId == 2)
+                                {
+                                    BankAccount ba = new BankAccount();
+                                    ba.UserId = addedUser.Id;
+                                    ba.MoneyAmount = 10000;
+                                    _bankAccountsRepository.AddBankAccount(ba);
+                                    MessageBox.Show($"{newUser.Name} was successfully added! We gave you 10000 ₴ for your first deposit.");
+                                }
+                                else
+                                    MessageBox.Show($"{newUser.Name} as admin was successfully added!");
+                            }
+                            else
+                                MessageBox.Show($"Something went wrong... Try later.");
+                            App.Current.Windows[1].Close();
+                        }
+
                     }
                 }));
             }

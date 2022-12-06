@@ -30,7 +30,7 @@ namespace ClientWPF.MVVM.ViewModel
         public ObservableCollection<Producer> Producers { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
         public ProductDetailsViewModel() { }
-        public ProductDetailsViewModel(Product product)
+        public ProductDetailsViewModel(Product product, int roleId)
         {
             _productImagesRepository = new ProductImagesRepository();
             _categoriesRepository = new CategoriesRepository();
@@ -55,7 +55,6 @@ namespace ClientWPF.MVVM.ViewModel
                 Rate = product.Rate,
                 ProducerId = product.ProducerId
             };
-
 
             _product.Pathes = new List<string>() { "/Images/Icons/defaultProductImage.png" }; // Default image for new product
 

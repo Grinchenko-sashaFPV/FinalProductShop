@@ -48,13 +48,13 @@
                 <StackPanel Orientation="Vertical">
                     <DockPanel Height="210">
                         <Button Background="Transparent" Command="{Binding OpenFileDialog}" >
-                            <Border
-                                Width="200" Height="200"
-                                Padding="0"
-                                CornerRadius="25"
+                            <Border Height="200"
+                                    Width="200"
+                                    Padding="3 0 3 0"
+                                    CornerRadius="10"
                                 BorderThickness="1.6" BorderBrush="Gray">
                                 <Border.Background>
-                                    <ImageBrush ImageSource="{Binding Pathes[0], UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ImageBrush Stretch="Fill" ImageSource="{Binding Pathes[0], UpdateSourceTrigger=PropertyChanged}"/>
                                 </Border.Background>
                             </Border>
                         </Button>

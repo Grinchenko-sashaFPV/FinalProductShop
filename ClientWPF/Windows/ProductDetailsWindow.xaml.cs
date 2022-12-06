@@ -30,7 +30,7 @@ namespace ClientWPF.Windows
         private ProductsRepository _productsRepository;
         private Product _changedProduct;
         public string RateImageSource { get; set; }
-        public ProductDetailsWindow(Product product)
+        public ProductDetailsWindow(Product product, int roleId)
         {
             InitializeComponent();
             this.DataContext = product;
@@ -44,12 +44,19 @@ namespace ClientWPF.Windows
             {
                 Id = product.Id,
                 Name = product.Name,
-                CurrentRateSource = product.CurrentRateSource,
                 CreationDate = product.CreationDate,
                 Description = product.Description,
                 ImageBytes = product.ImageBytes
             };
-
+            MessageBox.Show(roleId.ToString());
+            if(roleId == 2) // If user
+            {
+                Name.IsReadOnly = true;
+                Description.IsReadOnly = true;
+                Price.IsReadOnly = true;
+                Rates.IsReadOnly = true;
+                Quantity.IsReadOnly = true;
+            }
             //
             switch (product.Rate)
             {
@@ -144,50 +151,53 @@ namespace ClientWPF.Windows
             return img;
         }
 
-
         private void Rates_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            /*
             ComboBoxItem typeItem = (ComboBoxItem)Rates.SelectedItem;
             string value = typeItem.Content.ToString().Replace('.', ',');
-            double rate = Convert.ToDouble(value);
-            _changedProduct.Rate = rate;
-
-            switch (rate)
+            if(!String.IsNullOrEmpty(value))
             {
-                case 0:
-                    RateImageSource = "/Images/StarRates/Star_rating_0_of_5.png";
-                    break;
-                case 0.5:
-                    RateImageSource = "/Images/StarRates/Star_rating_0.5_of_5.png";
-                    break;
-                case 1:
-                    RateImageSource = "/Images/StarRates/Star_rating_1_of_5.png";
-                    break;
-                case 1.5:
-                    RateImageSource = "/Images/StarRates/Star_rating_1.5_of_5.png";
-                    break;
-                case 2:
-                    RateImageSource = "/Images/StarRates/Star_rating_2_of_5.png";
-                    break;
-                case 2.5:
-                    RateImageSource = "/Images/StarRates/Star_rating_2.5_of_5.png";
-                    break;
-                case 3:
-                    RateImageSource = "/Images/StarRates/Star_rating_3_of_5.png";
-                    break;
-                case 3.5:
-                    RateImageSource = "/Images/StarRates/Star_rating_3.5_of_5.png";
-                    break;
-                case 4:
-                    RateImageSource = "/Images/StarRates/Star_rating_4_of_5.png";
-                    break;
-                case 4.5:
-                    RateImageSource = "/Images/StarRates/Star_rating_4.5_of_5.png";
-                    break;
-                case 5:
-                    RateImageSource = "/Images/StarRates/Star_rating_5_of_5.png";
-                    break;
-            }
+                double rate = Convert.ToDouble(value);
+                _changedProduct.Rate = rate;
+
+                switch (rate)
+                {
+                    case 0:
+                        RateImageSource = "/Images/StarRates/Star_rating_0_of_5.png";
+                        break;
+                    case 0.5:
+                        RateImageSource = "/Images/StarRates/Star_rating_0.5_of_5.png";
+                        break;
+                    case 1:
+                        RateImageSource = "/Images/StarRates/Star_rating_1_of_5.png";
+                        break;
+                    case 1.5:
+                        RateImageSource = "/Images/StarRates/Star_rating_1.5_of_5.png";
+                        break;
+                    case 2:
+                        RateImageSource = "/Images/StarRates/Star_rating_2_of_5.png";
+                        break;
+                    case 2.5:
+                        RateImageSource = "/Images/StarRates/Star_rating_2.5_of_5.png";
+                        break;
+                    case 3:
+                        RateImageSource = "/Images/StarRates/Star_rating_3_of_5.png";
+                        break;
+                    case 3.5:
+                        RateImageSource = "/Images/StarRates/Star_rating_3.5_of_5.png";
+                        break;
+                    case 4:
+                        RateImageSource = "/Images/StarRates/Star_rating_4_of_5.png";
+                        break;
+                    case 4.5:
+                        RateImageSource = "/Images/StarRates/Star_rating_4.5_of_5.png";
+                        break;
+                    case 5:
+                        RateImageSource = "/Images/StarRates/Star_rating_5_of_5.png";
+                        break;
+                }
+            }*/
         }
     }
 }

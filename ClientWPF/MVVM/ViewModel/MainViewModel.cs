@@ -22,6 +22,7 @@ namespace ClientWPF.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
+        private readonly UsersRepository _usersRepository;
         private readonly CategoriesRepository _categoriesRepository;
         private readonly ProducersRepository _producersRepository;
         private readonly ProductImagesRepository _productImagesRepository;
@@ -33,6 +34,7 @@ namespace ClientWPF.MVVM.ViewModel
         public RelayCommand AddProductViewCommand { get; set; }
         public RelayCommand CategoryViewCommand { get; set; }
         public RelayCommand ProducerViewCommand { get; set; }
+        public RelayCommand ProfileViewCommand { get; set; }
 
         public HomeViewModel HomeVM { get; set; }
         public ProductsViewModel ProductsVM { get; set; }
@@ -40,6 +42,8 @@ namespace ClientWPF.MVVM.ViewModel
         public CategoryViewModel CategoryVM { get; set; }
         public ProducerViewModel ProducerVM { get; set; }
         public AccountViewModel AccountVM { get; set; }
+        public ProfileViewModel ProfileVM { get; set; }
+
         #region
         private object _currentView;
         public object CurrentView
@@ -95,6 +99,7 @@ namespace ClientWPF.MVVM.ViewModel
                 RegistrationDate = user.RegistrationDate,
                 UserImages = user.UserImages
                };
+
             if (CurrentUser.Role.Name == "Admin")
                 AdminOrUser = Visibility.Visible;
             else
@@ -104,9 +109,9 @@ namespace ClientWPF.MVVM.ViewModel
             _producersRepository = new ProducersRepository();
             _productImagesRepository = new ProductImagesRepository();
             _productsRepository = new ProductsRepository();
+            _usersRepository = new UsersRepository();
             _userImageRepository = new UserImagesRepository();
             // Set User profile image
-            MessageBox.Show(user.Id.ToString());
             UserImage userImage = _userImageRepository.GetImageByUserId(user.Id);
             if (userImage != null)
                 ImagePath = ConvertByteArrayToBitMapImage(userImage.Image);
@@ -114,11 +119,11 @@ namespace ClientWPF.MVVM.ViewModel
                 ImagePath = @"../../Images/defUser.png";
             // ViewModels
             HomeVM = new HomeViewModel();
-            ProductsVM = new ProductsViewModel(_productsRepository, _producersRepository, _categoriesRepository, _productImagesRepository);
+            ProductsVM = new ProductsViewModel(_productsRepository, _producersRepository, _categoriesRepository, _productImagesRepository, user.RoleId);
             ProductVM = new AddProductViewModel(_productImagesRepository, _categoriesRepository, _producersRepository, _productsRepository);
             CategoryVM = new CategoryViewModel(_categoriesRepository, _producersRepository, _productsRepository, _productImagesRepository);
             ProducerVM = new ProducerViewModel(_categoriesRepository, _producersRepository);
-
+            ProfileVM = new ProfileViewModel(_usersRepository, _userImageRepository, CurrentUser, ImagePath);
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
@@ -126,8 +131,9 @@ namespace ClientWPF.MVVM.ViewModel
             AddProductViewCommand = new RelayCommand(o => { CurrentView = ProductVM; });
             CategoryViewCommand = new RelayCommand(o => { CurrentView = CategoryVM; });
             ProducerViewCommand = new RelayCommand(o => { CurrentView = ProducerVM; });
+            ProfileViewCommand = new RelayCommand(o => { CurrentView = ProfileVM; });
         }
-        public BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
+        private BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
         {
             BitmapImage img = new BitmapImage();
             using (MemoryStream memStream = new MemoryStream(imageByteArray))
@@ -141,14 +147,25 @@ namespace ClientWPF.MVVM.ViewModel
             return img;
         }
 
-        public static readonly ICommand CloseCommand =
-            new RelayCommand(o => ((Window)o).Close());
+        private readonly RelayCommand _closeCommand;
+        public RelayCommand CloseCommand
+        {
+            get
+            {
+                return _closeCommand ?? (new RelayCommand(obj =>
+                {
+
+                    App.Current.MainWindow.Close();
+                    for (int i = 0; i < App.Current.Windows.Count; i++)
+                        App.Current.Windows[i].Close();
+                }));
+            }
+        }
         private readonly RelayCommand _signOut;
         public RelayCommand SignOut
         {
             get
             {
-                // TODO !! Delete checkBox IsAdmin and move to registration window. It is not neccessary!
                 return _signOut ?? (new RelayCommand(obj =>
                 {
                     AuthorizationView authWindow = new AuthorizationView(); 

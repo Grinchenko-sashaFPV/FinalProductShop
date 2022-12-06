@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Data.Entity.Migrations;
 
 namespace ClientWPF.Repositories.Implementation
 {
@@ -59,6 +61,17 @@ namespace ClientWPF.Repositories.Implementation
         public UserImage GetImageByUserId(int userId)
         {
             return _dbManager.UserImages.Where(img => img.UserId == userId).FirstOrDefault();
+        }
+
+        public void UpdateImageByUserId(int userId, UserImage image)
+        {
+            var findImage = _dbManager.UserImages.Where(img => img.UserId == userId).FirstOrDefault();
+            if(findImage != null) 
+            {
+                _dbManager.UserImages.Remove(findImage);
+                _dbManager.UserImages.Add(image);
+                _dbManager.SaveChanges();
+            }
         }
     }
     
