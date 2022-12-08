@@ -136,6 +136,7 @@
     <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProductDetailsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\RegistrationViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\UsersViewModel.cs" />
     <Compile Include="MVVM\View\AuthorizationView.xaml.cs">
       <DependentUpon>AuthorizationView.xaml</DependentUpon>
     </Compile>
@@ -154,6 +155,9 @@
     <Compile Include="MVVM\View\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Implementation\BankAccountsRepository.cs" />
     <Compile Include="Repositories\Implementation\CategoriesRepository.cs" />
     <Compile Include="Repositories\Implementation\ProducersRepository.cs" />
@@ -170,9 +174,6 @@
     <Compile Include="Repositories\Interfaces\IUsersRepository.cs" />
     <Compile Include="Windows\CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ProductDetailsWindow.xaml.cs">
-      <DependentUpon>ProductDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MVVM\Components\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -214,10 +215,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SavedView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,7 +231,6 @@
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProductsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProfileViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SavedViewModel.cs" />
     <Compile Include="MVVM\View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -244,13 +240,14 @@
     <Compile Include="MVVM\View\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SavedView.xaml.cs">
-      <DependentUpon>SavedView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVVM\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\UsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\CustomButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -270,10 +267,6 @@
     <Page Include="Windows\CustomMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\ProductDetailsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -366,8 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\close-icon.png" />
-    <Resource Include="Images\icon-1.png" />
-    <Resource Include="Images\user-profile.jpg" />
+    <Resource Include="Images\money_easy.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\icon-1024.png" />
@@ -420,6 +412,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\defUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\users_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fast_delivery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\new_product.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

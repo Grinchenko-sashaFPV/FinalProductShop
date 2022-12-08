@@ -18,7 +18,7 @@
                        FontSize="30"
                        HorizontalAlignment="Left"
                        Margin="5 10"/>
-            <ComboBox x:Name="producersList" DockPanel.Dock="Left" Margin="25 0 5 0" Width="400" ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
+            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="25 0 5 0" Width="400" ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedCategory}"/>
             <Button
                     Width="45px"
                     Height="45px"
@@ -29,7 +29,7 @@
                     HorizontalAlignment="Left"
                     />
             </Button>
-            <ComboBox x:Name="categoriesList" DockPanel.Dock="Left" Margin="20 0 5 0" Width="200" ItemsSource="{Binding Producers, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
+            <ComboBox x:Name="producersList" DockPanel.Dock="Left" Margin="20 0 5 0" Width="200" ItemsSource="{Binding Producers, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" VerticalAlignment="Center" FontSize="20" SelectedItem="{Binding SelectedProducer}"/>
             <Button
                     Width="45px"
                     Height="45px"
@@ -67,8 +67,8 @@
                                         <TextBlock FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                                         <TextBlock HorizontalAlignment="Center" Foreground="White" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
                                         <DockPanel>
-                                            <TextBlock FontSize="15" DockPanel.Dock="Left" HorizontalAlignment="Center" Width="70" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
-                                            <TextBlock FontSize="15" DockPanel.Dock="Right" HorizontalAlignment="Center"  Width="70" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+                                            <TextBlock FontSize="15" DockPanel.Dock="Left" Margin="3 0 0 0" TextAlignment="Left" Width="90" Foreground="White" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0\}$}" />
+                                            <TextBlock FontSize="15" DockPanel.Dock="Right" Margin="0 0 3 0" TextAlignment="Right" Width="90" Foreground="White" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0\} pieces}" />
                                             <Image Source="{Binding CurrentRateSource, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="93"/>
                                         </DockPanel>
                                         <TextBlock HorizontalAlignment="Center" Foreground="Aqua" Text="{Binding CreationDate,StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />

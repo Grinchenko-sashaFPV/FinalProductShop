@@ -38,6 +38,8 @@ namespace ClientWPF.MVVM.ViewModel
             NewName = _user.Name;
             ImagePath = image;
         }
+        
+        #region Accessors
         private string _newPassword;
         public string NewPassword
         {
@@ -68,6 +70,8 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged(nameof(ImagePath));
             }
         }
+        #endregion
+
         #region Commands
         private readonly RelayCommand _saveSettings;
         public RelayCommand SaveSettings
@@ -94,29 +98,33 @@ namespace ClientWPF.MVVM.ViewModel
 
                                     if (ImagePath != null)
                                     {
-                                        string imgPath = (string)ImagePath;
-                                        if (imgPath.Length > 0)
+                                        try // If BitMap it will be exception
                                         {
-                                            byte[] buff;
-                                            if (File.Exists(imgPath))
+                                            string imgPath = (string)ImagePath;
+                                            if (imgPath.Length > 0)
                                             {
-                                                buff = File.ReadAllBytes(imgPath);
-                                                Image img = Image.FromFile(imgPath);
-                                                Bitmap resizedImage = new Bitmap(img, new System.Drawing.Size(256, 256));
-                                                using (var stream = new MemoryStream())
+                                                byte[] buff;
+                                                if (File.Exists(imgPath))
                                                 {
-                                                    resizedImage.Save(stream, ImageFormat.Jpeg);
-                                                    byte[] bytes = stream.ToArray();
-                                                    // User image
-                                                    UserImage userImage = new UserImage();
-                                                    userImage.FileExtension = Path.GetExtension(imgPath);
-                                                    userImage.Image = bytes;
-                                                    userImage.Size = bytes.Length;
-                                                    userImage.UserId = _user.Id;
-                                                    _userImagesRepository.UpdateImageByUserId(_user.Id, userImage);
+                                                    buff = File.ReadAllBytes(imgPath);
+                                                    Image img = Image.FromFile(imgPath);
+                                                    Bitmap resizedImage = new Bitmap(img, new System.Drawing.Size(256, 256));
+                                                    using (var stream = new MemoryStream())
+                                                    {
+                                                        resizedImage.Save(stream, ImageFormat.Jpeg);
+                                                        byte[] bytes = stream.ToArray();
+                                                        // User image
+                                                        UserImage userImage = new UserImage();
+                                                        userImage.FileExtension = Path.GetExtension(imgPath);
+                                                        userImage.Image = bytes;
+                                                        userImage.Size = bytes.Length;
+                                                        userImage.UserId = _user.Id;
+                                                        _userImagesRepository.UpdateImageByUserId(_user.Id, userImage);
+                                                    }
                                                 }
                                             }
                                         }
+                                        catch(Exception ex) { }
                                     }
                                     MessageBox.Show("Account was successfully updated!");
                                 }

@@ -35,17 +35,17 @@
             <StackPanel VerticalAlignment="Top" Margin="15 40 15 0">
                 <Label Content="Username:"/>
                 <TextBox FontFamily="Champagne &amp; Limousines" FontSize="18" Padding="3" x:Name="loginField" 
-                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="AliceBlue" Background="#e9e9e9" Width="242" Height="30"/>
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="AliceBlue" VerticalContentAlignment="Center" Background="#e9e9e9" Width="242" Height="35"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Password:"/>
                     <Label x:Name="passwordWeaknessChecker" HorizontalAlignment="Right" FontWeight="Bold"
                            Content="{Binding PasswordCheckerLabel, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding ForegroundColor, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password}" Padding="3" Height="37" Width="249"/>
+                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password}" Padding="3" Height="41" Width="249"/>
                 <Label Content="Re-Enter:"/>
-                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password2}" Padding="3" Height="37" Width="249"/>
+                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password2}" Padding="3" Height="41" Width="249"/>
                 <Label Name="SecretPhrase" Content="Secret Phrase:" Visibility="{Binding IsChecked,ElementName=isAdmin,Converter={StaticResource b2v}}"/>
-                <components:BindablePasswordBox  x:Name="SecretPhraseBox" Grid.Column="1" Password="{Binding SecretPhrase}" Visibility="{Binding IsChecked,ElementName=isAdmin,Converter={StaticResource b2v}}" Padding="3" Height="30" Width="249"/>
+                <components:BindablePasswordBox  x:Name="SecretPhraseBox" Grid.Column="1" Password="{Binding SecretPhrase}" Visibility="{Binding IsChecked,ElementName=isAdmin,Converter={StaticResource b2v}}" Padding="3" Height="41" Width="249"/>
                 <CheckBox x:Name="isAdmin" Content="I'm admin" FontFamily="Champagne &amp; Limousines" FontSize="13" Margin="0 30 0 15" IsChecked="{Binding IsAdmin}" />
             </StackPanel>
         </Grid>

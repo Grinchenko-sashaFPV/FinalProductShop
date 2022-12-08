@@ -34,12 +34,12 @@
         </Rectangle>
         <Grid VerticalAlignment="Bottom" Margin="35,80" Height="200">
             <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="18"/>
-            <StackPanel VerticalAlignment="Top" Margin="15 50 15 0">
+            <StackPanel VerticalAlignment="Top" Margin="15 40 15 0">
                 <Label Content="Username:"/>
                 <TextBox FontFamily="Champagne &amp; Limousines" FontSize="18" Padding="3" x:Name="loginField" 
-                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="AliceBlue" Background="#e9e9e9" Width="242" Height="23"/>
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="AliceBlue" Background="#e9e9e9" Width="242" Height="35"/>
                 <Label Content="Password:"/>
-                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password}" Padding="3" Height="30" Width="249"/>
+                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password}" Padding="3" Height="41" Width="249"/>
             </StackPanel>
         </Grid>
         <Button Cursor="Hand" Width="160" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="LOGIN" Background="#2a2e4d" x:Name="loginButton" Foreground="White" Padding="7"

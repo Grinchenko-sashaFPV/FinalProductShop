@@ -18,7 +18,7 @@ namespace ClientWPF.MVVM.ViewModel
 {
     internal class ProductsViewModel : ObservableObject
     {
-        private int _roleId;
+        private User _currentUser;
         private readonly ProductsRepository _productsRepository;
         private readonly ProducersRepository _producersRepository;
         private readonly CategoriesRepository _categoriesRepository;
@@ -33,7 +33,7 @@ namespace ClientWPF.MVVM.ViewModel
         private Product _selectedProduct;
         private string _starRatesImageSource;
         public ProductsViewModel(ProductsRepository productsRepository, ProducersRepository producersRepository,
-            CategoriesRepository categoriesRepository, ProductImagesRepository productImagesRepository, int roleId)
+            CategoriesRepository categoriesRepository, ProductImagesRepository productImagesRepository, User currentUser)
         {
             _productsRepository = productsRepository;
             _producersRepository = producersRepository;
@@ -43,8 +43,7 @@ namespace ClientWPF.MVVM.ViewModel
             _selectedProducer = new Producer();
             _selectedCategory = new Category();
             _selectedProduct = new Product();
-
-            _roleId = roleId;
+            _currentUser = currentUser;
 
             Producers = new ObservableCollection<Producer>();
             Categories = new ObservableCollection<Category>();
@@ -88,8 +87,11 @@ namespace ClientWPF.MVVM.ViewModel
                 SelectedProduct.ProductImage = buff_pathes.ToList();
                 //
                 //ProductDetailsViewModel viewModel = new ProductDetailsViewModel(_selectedProduct);
-                ProductDetailsWindow productDetailsWindow = new ProductDetailsWindow(SelectedProduct, _roleId);
-                productDetailsWindow.ShowDialog();
+                if(SelectedProduct != null)
+                {
+                    ProductDetailsView productDetailsView = new ProductDetailsView(SelectedProduct, _currentUser);
+                    productDetailsView.ShowDialog();
+                }
                 OnPropertyChanged("SelectedProduct");
             }
         }
@@ -348,6 +350,10 @@ namespace ClientWPF.MVVM.ViewModel
             else
                 LoadProducers();
         }
+        private List<ProductImage> LoadImagesForProduct(int productId)
+        {
+            return _productImagesRepository.GetImagesByProductId(productId).ToList();
+        }
         #endregion
 
         #region Star image source adapter & load images func
@@ -360,11 +366,8 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged("StarRatesImageSource");
             }
         }
-        private List<ProductImage> LoadImagesForProduct(int productId)
-        {
-            return _productImagesRepository.GetImagesByProductId(productId).ToList();
-        }
         #endregion
+
         #region Commands
         private readonly RelayCommand _refreshCategories;
         public RelayCommand RefreshCategories

@@ -157,6 +157,7 @@ namespace ClientWPF.MVVM.ViewModel
         }
         #endregion
 
+        #region Commands
         private readonly RelayCommand _signUp;
         public RelayCommand SignUp
         {
@@ -208,7 +209,7 @@ namespace ClientWPF.MVVM.ViewModel
                                     ba.UserId = addedUser.Id;
                                     ba.MoneyAmount = 10000;
                                     _bankAccountsRepository.AddBankAccount(ba);
-                                    MessageBox.Show($"{newUser.Name} was successfully added! We gave you 10000 ₴ for your first deposit.");
+                                    MessageBox.Show($"{newUser.Name} was successfully added! We gave you 10000 $ for your first deposit.");
                                 }
                                 else
                                     MessageBox.Show($"{newUser.Name} as admin was successfully added!");
@@ -249,5 +250,6 @@ namespace ClientWPF.MVVM.ViewModel
                 }));
             }
         }
+        #endregion
     }
 }

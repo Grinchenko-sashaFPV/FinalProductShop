@@ -45,6 +45,23 @@ namespace ClientWPF.Repositories.Implementation
             _dbManager.SaveChanges();
         }
 
+        public void DeleteProductsByProducerId(int producerId)
+        {
+            var products = _dbManager.Products.Where(p => p.ProducerId == producerId).ToList();
+            foreach (var product in products)
+            {
+                var images = _dbManager.ProductImages
+                    .Where(image => image.ProductId == product.Id).ToList();
+                if (images != null)
+                {
+                    foreach (var img in images)
+                        _dbManager.ProductImages.Remove(img);
+                }
+                _dbManager.Products.Remove(product);
+            }
+            _dbManager.SaveChanges();
+        }
+
         public List<Product> GetAllProducts()
         {
             return _dbManager.Products.ToList();
@@ -61,7 +78,7 @@ namespace ClientWPF.Repositories.Implementation
         }
         public List<Product> GetProductsByCategoryId(int categoryId)
         {
-            return _dbManager.Products.Where(_p => _p.Producer.CategoryId == categoryId).ToList();
+            return _dbManager.Products.Where(_p => _p.Producer.CategoryId == categoryId)?.ToList();
         }
 
         public List<Product> GetProductsByPriceAsc(int producerId, int categoryId)

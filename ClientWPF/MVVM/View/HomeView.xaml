@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="705" d:DesignWidth="955">
     <StackPanel>
-        <TextBlock Text="Discover"
+        <TextBlock Text="Hello! Its our new Online Shop"
                    Foreground="White"
                    FontSize="30"
                    HorizontalAlignment="Left"
@@ -15,8 +15,7 @@
         <StackPanel Orientation="Horizontal">
 
             <Border Width="300"
-                    Height="200"
-                    >
+                    Height="310" CornerRadius="10">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                         <GradientStop Color="#5bc3ff" Offset="0.0"/>
@@ -26,28 +25,153 @@
                 <Border.Clip>
                     <RectangleGeometry RadiusX="10"
                                        RadiusY="10"
-                                       Rect="0,0,400,200"/>
+                                       Rect="0,0,400,310"/>
                 </Border.Clip>
                 <Grid>
                     <StackPanel>
-                        <TextBlock Text="World leader&#x0a; in asfgfgdsfg"
+                        <TextBlock Text="We opened!&#x0a;Our delivery service"
                                    FontSize="28"
                                    Foreground="White"
                                    Margin="20,10,10,0"/>
-                        <TextBlock Text="Get Started!"
-                                   FontSize="13"
+                        <TextBlock Text="Click here!"
+                                   FontSize="16"
+                                   
                                    Foreground="White"
                                    Margin="20,10,10,0"/>
                     </StackPanel>
-                    <Image Width="123"
-                           Height="118"
-                           Source="/Images/icon-1.png"
+                    <Image Width="254"
+                           Height="236"
+                           Source="/Images/fast_delivery.png"
                            HorizontalAlignment="Right"
-                           VerticalAlignment="Bottom"
-                           Margin="0,0,5,10"/>
-
+                           VerticalAlignment="Bottom" Margin="0,0,0,-26"/>
                 </Grid>
             </Border>
+            <Border Width="300"
+                    Height="310" Margin="10 0 10 0" CornerRadius="10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#cc973a" Offset="1"/>
+                        <GradientStop Color="#ffca49" Offset="0.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="Top Brands!&#x0a;Our producers rate"
+                                   FontSize="28"
+                                   Foreground="White"
+                                   Margin="20,10,10,0"/>
+                        <StackPanel VerticalAlignment="Center" Margin="80 10 0 0">
+                            <TextBlock Text="{Binding TopProducers}" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Width="300"
+                    Height="310" CornerRadius="10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#5bc3ff" Offset="0.0"/>
+                        <GradientStop Color="#3aa0ff" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="Products counter!"
+                                   FontSize="28"
+                                   Foreground="White"
+                                   Margin="20,10,10,0"/>
+                        <TextBlock FontSize="25" Foreground="White" HorizontalAlignment="Center" Text="{Binding ProductCounter, StringFormat=\{0\} products}" Margin="0 100 0 0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+        <TextBlock Text="Information"
+                   Foreground="White"
+                   FontSize="30"
+                   HorizontalAlignment="Left"
+                   Margin="0,5,0,10"/>
+        <StackPanel Orientation="Horizontal" Height="275">
+
+            <Border Width="300"
+                    Height="250" CornerRadius="10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#1a5730" Offset="0.0"/>
+                        <GradientStop Color="#4fff90" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,400,310"/>
+                </Border.Clip>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="New items in MSI!&#x0a;Check out"
+                                   FontSize="26"
+                                   Foreground="White"
+                                   Margin="20,10,10,0"/>
+                        <TextBlock Text="Click here!"
+                                   FontSize="16"
+                                   
+                                   Foreground="White"
+                                   Margin="20,10,10,0"/>
+                    </StackPanel>
+                    <Image Width="165"
+                           Height="140"
+                           Source="/Images/new_product.png"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom" Margin="0,0,25,19"/>
+                </Grid>
+            </Border>
+            <Border Width="300"
+                    Height="250" Margin="10 0 10 0" CornerRadius="10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#854eff" Offset="1"/>
+                        <GradientStop Color="#8d992e" Offset="0.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="Holidays sales soon!&#x0a;Check our site"
+                                   FontSize="26"
+                                   Foreground="White"
+                                   Margin="20,10,10,0"/>
+                        <Image Width="130"
+                           Height="130"
+                           Margin="100 10 0 0"
+                           Source="/Images/money_easy.png"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Width="300"
+                    Height="250" CornerRadius="10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#3aa0ff" Offset="0.0"/>
+                        <GradientStop Color="#4fff90" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="Information about &#x0a;our company"
+                                   FontSize="26"
+                                   Foreground="White"
+                                   Margin="20,10,10,0"/>
+                        <TextBlock Text="Check here"
+                                   FontSize="13"
+                                   Foreground="White"
+                                   Margin="20,10,10,0"/>
+                        <Image Width="130"
+                           Height="130"
+                           Margin="100 -5 0 0"
+                           Source="/Images/info_icon.png"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
         </StackPanel>
     </StackPanel>
 </UserControl>

@@ -74,6 +74,7 @@ namespace ClientWPF.MVVM.ViewModel
         }
         #endregion
 
+        #region Commands
         private readonly RelayCommand _signIn;
         public RelayCommand SignIn
         {
@@ -125,5 +126,6 @@ namespace ClientWPF.MVVM.ViewModel
                 }));
             }
         }
+        #endregion
     }
 }

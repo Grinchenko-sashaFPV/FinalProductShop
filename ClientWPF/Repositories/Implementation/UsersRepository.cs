@@ -37,6 +37,17 @@ namespace ClientWPF.Repositories.Implementation
         {
             return  _dbManager.Users.Where(user => user.Name == userName).FirstOrDefault();
         }
+
+        public List<User> GetAllUsers()
+        {
+            return _dbManager.Users.Where(user => user.RoleId == 2).ToList();
+        }
+
+        public List<User> GetUsersByContaintsLetters(string letters)
+        {
+            return _dbManager.Users.Where(user => user.Name.Contains(letters)).ToList();
+        }
+
         public void UpdateUser(User changedUser)
         {
             var user = _dbManager.Users.Find(changedUser.Id);

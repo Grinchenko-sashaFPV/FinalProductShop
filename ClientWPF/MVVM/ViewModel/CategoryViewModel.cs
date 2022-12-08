@@ -22,22 +22,10 @@ namespace ClientWPF.MVVM.ViewModel
         private readonly ProducersRepository _producerRepository;
         private readonly ProductsRepository _productsRepository;
         private readonly ProductImagesRepository _productsImagesRepository;
-        private ObservableCollection<Category> _categories;
-        public ObservableCollection<Category> Categories
-        {
-            get { return _categories; }
-            set
-            {
-                _categories = value;
-                OnPropertyChanged("Categories");
-            }
-        }
-
+        public ObservableCollection<Category> Categories { get; set; }
         public CategoryViewModel(CategoriesRepository categoriesRepository, ProducersRepository producersRepository,
             ProductsRepository productsRepository, ProductImagesRepository productImagesRepository)
         {
-            _categories = new ObservableCollection<Category>();
-            
             _categoriesRepository = categoriesRepository;
             _producerRepository = producersRepository;
             _productsRepository = productsRepository;
@@ -48,6 +36,7 @@ namespace ClientWPF.MVVM.ViewModel
             LoadCategories();
         }
 
+        #region Accessors
         private string _searchedPhrase;
         public string SearchedPhrase
         {
@@ -77,6 +66,8 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged("NewNameCategory");
             }
         }
+        #endregion
+
         #region Selected objects
         private Category _selectedCategory;
         public Category SelectedCategory
@@ -89,6 +80,7 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
+
         #region Load data adapter
         private void LoadCategories()
         {
@@ -98,6 +90,7 @@ namespace ClientWPF.MVVM.ViewModel
                 Categories.Add(category);
         }
         #endregion
+
         #region Commands
         private readonly RelayCommand _saveChangedCategory;
         public RelayCommand SaveChangedCategory
@@ -152,6 +145,7 @@ namespace ClientWPF.MVVM.ViewModel
                                     BinaryFileManager.SaveObjectsToFile(@"../../Archive/producers.dat", producerList);
                                 if(productsList.Count > 0)
                                 {
+                                    /*
                                     foreach (var product in productsList)
                                     {
                                         // TODO !!! CHECK Images, smth can be not working!
@@ -162,14 +156,13 @@ namespace ClientWPF.MVVM.ViewModel
                                             product.ProductImage = new List<ProductImage>();
                                             foreach (var image in imagesOfProduct)
                                                 product.ProductImage.ToList().Add(image);
-                                            MessageBox.Show($"Photos count -> {product.ProductImage.ToList().Count.ToString()}");
                                         }
-                                    }
+                                    }*/
                                     // Serialize all
                                     BinaryFileManager.SaveObjectsToFile(@"../../Archive/products.dat", productsList);
                                 }
                                 // Then delete by cascade all models
-                                if (producerList.Count > 0)
+                                if (productsList.Count > 0)
                                     _productsRepository.DeleteProductsByCategoryId(_selectedCategory.Id);
                                 if (producerList.Count > 0)
                                     _producerRepository.DeleteProducersByCategoryId(_selectedCategory.Id);

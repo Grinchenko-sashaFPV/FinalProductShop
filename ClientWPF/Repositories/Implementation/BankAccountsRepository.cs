@@ -3,6 +3,7 @@ using ClientWPF.Repositories.Interfaces;
 using ModelsLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace ClientWPF.Repositories.Implementation
                 bankAccount.User = changedBankAccount.User;
                 bankAccount.User.Id = changedBankAccount.UserId;
                 bankAccount.MoneyAmount = changedBankAccount.MoneyAmount;
-                _dbManager.BankAccounts.Add(bankAccount);
+                _dbManager.BankAccounts.AddOrUpdate(bankAccount);
                 _dbManager.SaveChanges();
             }
         }

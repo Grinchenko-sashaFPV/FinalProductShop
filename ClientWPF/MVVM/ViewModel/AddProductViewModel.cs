@@ -290,6 +290,5 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
-
     }
 }

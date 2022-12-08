@@ -28,6 +28,7 @@ namespace ClientWPF.MVVM.ViewModel
         private readonly ProductImagesRepository _productImagesRepository;
         private readonly ProductsRepository _productsRepository;
         private readonly UserImagesRepository _userImageRepository;
+        private readonly BankAccountsRepository _bankAccountsRepository;
 
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand ProductsViewCommand { get; set; }
@@ -35,6 +36,7 @@ namespace ClientWPF.MVVM.ViewModel
         public RelayCommand CategoryViewCommand { get; set; }
         public RelayCommand ProducerViewCommand { get; set; }
         public RelayCommand ProfileViewCommand { get; set; }
+        public RelayCommand UsersViewCommand { get; set; }
 
         public HomeViewModel HomeVM { get; set; }
         public ProductsViewModel ProductsVM { get; set; }
@@ -43,8 +45,9 @@ namespace ClientWPF.MVVM.ViewModel
         public ProducerViewModel ProducerVM { get; set; }
         public AccountViewModel AccountVM { get; set; }
         public ProfileViewModel ProfileVM { get; set; }
+        public UsersViewModel UsersVM { get; set; }
 
-        #region
+        #region Accessors
         private object _currentView;
         public object CurrentView
         {
@@ -111,6 +114,8 @@ namespace ClientWPF.MVVM.ViewModel
             _productsRepository = new ProductsRepository();
             _usersRepository = new UsersRepository();
             _userImageRepository = new UserImagesRepository();
+            _bankAccountsRepository = new BankAccountsRepository();
+
             // Set User profile image
             UserImage userImage = _userImageRepository.GetImageByUserId(user.Id);
             if (userImage != null)
@@ -118,12 +123,13 @@ namespace ClientWPF.MVVM.ViewModel
             else
                 ImagePath = @"../../Images/defUser.png";
             // ViewModels
-            HomeVM = new HomeViewModel();
-            ProductsVM = new ProductsViewModel(_productsRepository, _producersRepository, _categoriesRepository, _productImagesRepository, user.RoleId);
+            HomeVM = new HomeViewModel(_productsRepository, _producersRepository);
+            ProductsVM = new ProductsViewModel(_productsRepository, _producersRepository, _categoriesRepository, _productImagesRepository, user);
             ProductVM = new AddProductViewModel(_productImagesRepository, _categoriesRepository, _producersRepository, _productsRepository);
             CategoryVM = new CategoryViewModel(_categoriesRepository, _producersRepository, _productsRepository, _productImagesRepository);
             ProducerVM = new ProducerViewModel(_categoriesRepository, _producersRepository);
             ProfileVM = new ProfileViewModel(_usersRepository, _userImageRepository, CurrentUser, ImagePath);
+            UsersVM = new UsersViewModel(_usersRepository, _userImageRepository, _bankAccountsRepository);
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
@@ -132,21 +138,9 @@ namespace ClientWPF.MVVM.ViewModel
             CategoryViewCommand = new RelayCommand(o => { CurrentView = CategoryVM; });
             ProducerViewCommand = new RelayCommand(o => { CurrentView = ProducerVM; });
             ProfileViewCommand = new RelayCommand(o => { CurrentView = ProfileVM; });
+            UsersViewCommand = new RelayCommand(o => { CurrentView = UsersVM; });
         }
-        private BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
-        {
-            BitmapImage img = new BitmapImage();
-            using (MemoryStream memStream = new MemoryStream(imageByteArray))
-            {
-                img.BeginInit();
-                img.CacheOption = BitmapCacheOption.OnLoad;
-                img.StreamSource = memStream;
-                img.EndInit();
-                img.Freeze();
-            }
-            return img;
-        }
-
+        #region Commands
         private readonly RelayCommand _closeCommand;
         public RelayCommand CloseCommand
         {
@@ -168,11 +162,29 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 return _signOut ?? (new RelayCommand(obj =>
                 {
-                    AuthorizationView authWindow = new AuthorizationView(); 
-                    authWindow.Show();
-                    App.Current.MainWindow.Close();
+                    MessageBoxResult result = MessageBox.Show($"Are you sure you want to exit?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        AuthorizationView authWindow = new AuthorizationView();
+                        authWindow.Show();
+                        App.Current.MainWindow.Close();
+                    }
                 }));
             }
+        }
+        #endregion
+        private BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
+        {
+            BitmapImage img = new BitmapImage();
+            using (MemoryStream memStream = new MemoryStream(imageByteArray))
+            {
+                img.BeginInit();
+                img.CacheOption = BitmapCacheOption.OnLoad;
+                img.StreamSource = memStream;
+                img.EndInit();
+                img.Freeze();
+            }
+            return img;
         }
     }
 }

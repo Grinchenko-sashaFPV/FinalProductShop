@@ -73,7 +73,7 @@
                              Command="{Binding AddProductViewCommand}"
                              Cursor="Hand"/>
 
-                <RadioButton Content="Category Manager"
+                <RadioButton Content="Categories"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
@@ -82,13 +82,22 @@
                              Command="{Binding CategoryViewCommand}"
                              Cursor="Hand"/>
 
-                <RadioButton Content="Producer Manager"
+                <RadioButton Content="Producers"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Visibility="{Binding AdminOrUser}"
                              Command="{Binding ProducerViewCommand}"
+                             Cursor="Hand"/>
+                
+                <RadioButton Content="Users"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Visibility="{Binding AdminOrUser}"
+                             Command="{Binding UsersViewCommand}"
                              Cursor="Hand"/>
 
                 <RadioButton Content="Profile"
@@ -97,13 +106,6 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ProfileViewCommand}"
-                             Cursor="Hand"/>
-
-                <RadioButton Content="Saved"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"
                              Cursor="Hand"/>
 
                 <RadioButton Content="Exit"

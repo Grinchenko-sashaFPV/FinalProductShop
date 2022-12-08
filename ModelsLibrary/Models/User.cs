@@ -28,5 +28,9 @@ namespace ModelsLibrary.Models
 
         public IEnumerable<BankAccount> BankAccounts { get; set; }
         public IEnumerable<UserImage> UserImages { get; set; }
+        [NotMapped]
+        public byte[] ImageBytes { get; set; }
+        [NotMapped]
+        public double MoneyAmount { get; set; }
     }
 }

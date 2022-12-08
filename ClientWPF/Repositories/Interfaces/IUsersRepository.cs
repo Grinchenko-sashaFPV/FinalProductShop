@@ -13,5 +13,7 @@ namespace ClientWPF.Repositories.Interfaces
         void UpdateUser(User changedUser);
         User FindUserByName(string userName);
         void DeleteUser(int userId);
+        List<User> GetAllUsers();
+        List<User> GetUsersByContaintsLetters(string letters);
     }
 }

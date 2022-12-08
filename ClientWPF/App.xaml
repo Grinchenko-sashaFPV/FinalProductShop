@@ -26,10 +26,6 @@
                 <view:AddProductView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:ProductDetailsViewModel}">
-                <view:ProductDetailsView/>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type viewModel:CategoryViewModel}">
                 <view:CategoryView/>
             </DataTemplate>
@@ -40,6 +36,10 @@
             
             <DataTemplate DataType="{x:Type viewModel:ProfileViewModel}">
                 <view:ProfileView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:UsersViewModel}">
+                <view:UsersView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
