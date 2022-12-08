@@ -1,4 +1,5 @@
-﻿using ClientWPF.MVVM.View;
+﻿using ClientWPF.Core;
+using ClientWPF.MVVM.View;
 using ClientWPF.Repositories.Implementation;
 using ModelsLibrary.Models;
 using System;
@@ -13,28 +14,30 @@ using System.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class ProductDetailsViewModel : INotifyPropertyChanged
+    internal class ProductDetailsViewModel : ObservableObject
     {
         private readonly ProductImagesRepository _productImagesRepository;
         private readonly CategoriesRepository _categoriesRepository;
         private readonly ProducersRepository _producersRepository;
         private readonly ProductsRepository _productsRepository;
+        private readonly BankAccountsRepository _bankAccountsRepository;
 
         private Product _product;
+        private User _currentUser;
         private Category _selectedCategory;
         private Producer _selectedProducer;
-        private string _starRatesImageSource;
 
         public List<double> RatesValues { get; set; }
         public ObservableCollection<Producer> Producers { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
         public ProductDetailsViewModel() { }
-        public ProductDetailsViewModel(Product product)
+        public ProductDetailsViewModel(Product product, User currentUser)
         {
             _productImagesRepository = new ProductImagesRepository();
             _categoriesRepository = new CategoriesRepository();
             _producersRepository = new ProducersRepository();
             _productsRepository = new ProductsRepository();
+            _bankAccountsRepository = new BankAccountsRepository();
 
             _selectedCategory = new Category();
             _selectedProducer = new Producer();
@@ -54,11 +57,9 @@ namespace ClientWPF.MVVM.ViewModel
                 Rate = product.Rate,
                 ProducerId = product.ProducerId
             };
-
+            _currentUser = currentUser;
 
             _product.Pathes = new List<string>() { "/Images/Icons/defaultProductImage.png" }; // Default image for new product
-
-            RatesValues = new List<double>() { 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 };
 
             Producers = new ObservableCollection<Producer>();
             Categories = new ObservableCollection<Category>();
@@ -66,8 +67,6 @@ namespace ClientWPF.MVVM.ViewModel
             // Loading producers and categories for dropdown lists
             LoadProducers();
             LoadCategories();
-            ProductDetailsView view = new ProductDetailsView();
-            view.Show();
         }
 
         #region Selected objects
@@ -87,6 +86,8 @@ namespace ClientWPF.MVVM.ViewModel
             set
             {
                 _selectedProducer = value;
+                if(SelectedProducer != null) 
+                    _product.ProducerId = SelectedProducer.Id;
                 OnPropertyChanged("SelectedProducer");
             }
         }
@@ -179,42 +180,6 @@ namespace ClientWPF.MVVM.ViewModel
                 else
                 {
                     _product.Rate = value;
-                    switch (value)
-                    {
-                        case 0:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_0_of_5.png";
-                            break;
-                        case 0.5:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_0.5_of_5.png";
-                            break;
-                        case 1:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_1_of_5.png";
-                            break;
-                        case 1.5:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_1.5_of_5.png";
-                            break;
-                        case 2:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_2_of_5.png";
-                            break;
-                        case 2.5:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_2.5_of_5.png";
-                            break;
-                        case 3:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_3_of_5.png";
-                            break;
-                        case 3.5:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_3.5_of_5.png";
-                            break;
-                        case 4:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_4_of_5.png";
-                            break;
-                        case 4.5:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_4.5_of_5.png";
-                            break;
-                        case 5:
-                            StarRatesImageSource = "/Images/StarRates/Star_rating_5_of_5.png";
-                            break;
-                    }
                     OnPropertyChanged("Rate");
                 }
             }
@@ -228,21 +193,67 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged("CreationDate");
             }
         }
-        public string StarRatesImageSource
+        #endregion
+
+        #region Commands
+        private readonly RelayCommand _saveChangesProductCommand;
+        public RelayCommand SaveChangesProductCommand
         {
-            get => _starRatesImageSource;
-            set
+            get
             {
-                _starRatesImageSource = value;
-                OnPropertyChanged("StarRatesImageSource");
+                return _saveChangesProductCommand ?? (new RelayCommand(obj =>
+                {
+                    MessageBoxResult result = MessageBox.Show($"Are you sure you want to save changes?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        if (SelectedProducer != null)
+                        {
+                            _productsRepository.UpdateProduct(_product);
+                            MessageBox.Show($"{_product.Name} was successfully updated!");
+                        }
+                        else
+                            MessageBox.Show("Select producer!");
+                    }
+                }));
+            }
+        }
+        private readonly RelayCommand _deleteProductCommand;
+        public RelayCommand DeleteProductCommand
+        {
+            get
+            {
+                return _deleteProductCommand ?? (new RelayCommand(obj =>
+                {
+                    MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete current product?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        _productImagesRepository.DeleteProductImagesByProductId(_product.Id);
+                        _productsRepository.DeleteProductById(_product.Id);
+                        MessageBox.Show("Product was successfully deleted!");
+                        App.Current.Windows[1].Close();
+                    }
+                }));
+            }
+        }
+        private readonly RelayCommand _buyProductCommand;
+        public RelayCommand BuyProductCommand
+        {
+            get
+            {
+                return _buyProductCommand ?? (new RelayCommand(obj =>
+                {
+                    var account =_bankAccountsRepository.GetBankAccountByUserId(_currentUser.Id);
+                    if (account.MoneyAmount > _product.Price)
+                    {
+                        account.MoneyAmount = account.MoneyAmount - _product.Price;
+                        _bankAccountsRepository.UpdateBankAccount(account.Id, account);
+                        MessageBox.Show($"{_product.Name} was ordered! Thank you. Your deposit: {account.MoneyAmount}$");
+                    }
+                    else
+                        MessageBox.Show($"You can't afford it. Your deposit: {account.MoneyAmount}$, but product price: {_product.Price}$");
+                }));
             }
         }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

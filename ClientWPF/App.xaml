@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ClientWPF"
              xmlns:viewModel="clr-namespace:ClientWPF.MVVM.ViewModel"
              xmlns:view="clr-namespace:ClientWPF.MVVM.View"
-             StartupUri="MVVM/View/AuthorizationWindow.xaml"><!--AuthorizationWindow-->
+             StartupUri="MVVM/View/AuthorizationView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,16 +26,20 @@
                 <view:AddProductView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:ProductDetailsViewModel}">
-                <view:ProductDetailsView/>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type viewModel:CategoryViewModel}">
                 <view:CategoryView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:ProducerViewModel}">
                 <view:ProducerView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:ProfileViewModel}">
+                <view:ProfileView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:UsersViewModel}">
+                <view:UsersView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

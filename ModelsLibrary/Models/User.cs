@@ -21,8 +21,16 @@ namespace ModelsLibrary.Models
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(50)] // MAX length of md5 generators string is 32
         public string Password { get; set; }
+        public DateTime RegistrationDate { get; set; }
         [ForeignKey("Role")]
         public int RoleId { get; set; }
         public virtual Role Role { get; set; }
+
+        public IEnumerable<BankAccount> BankAccounts { get; set; }
+        public IEnumerable<UserImage> UserImages { get; set; }
+        [NotMapped]
+        public byte[] ImageBytes { get; set; }
+        [NotMapped]
+        public double MoneyAmount { get; set; }
     }
 }

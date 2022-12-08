@@ -17,5 +17,6 @@ namespace ClientWPF.Repositories.Interfaces
         void UpdateProduct(Product changedProduct);
         void DeleteProductById(int productId);
         void DeleteProductsByCategoryId(int categoryId);
+        void DeleteProductsByProducerId(int producerId);
     }
 }

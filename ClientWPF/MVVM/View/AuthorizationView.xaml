@@ -1,4 +1,4 @@
-﻿<Window x:Class="ClientWPF.MVVM.View.AuthorizationWindow"
+﻿<Window x:Class="ClientWPF.MVVM.View.AuthorizationView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:ClientWPF.MVVM.ViewModel"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Login" Height="500" Width="350" 
+        Title="Login" Height="450" Width="350" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
         FontFamily="Segoe UI Emoji"
@@ -18,9 +18,6 @@
     <Window.DataContext>
         <viewModel:AccountViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="b2v" />
-    </Window.Resources>
     <Grid>
         <Rectangle Height="280" VerticalAlignment="Top">
             <Rectangle.Fill>
@@ -30,26 +27,25 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Rectangle Width="280" Height="260" VerticalAlignment="Bottom" Margin="0 80" RadiusY="10" RadiusX="10" Fill="white">
+        <Rectangle Width="280" Height="200" VerticalAlignment="Bottom" Margin="0 80" RadiusY="10" RadiusX="10" Fill="white">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="Gray"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Grid VerticalAlignment="Bottom" Margin="35,80" Height="260">
+        <Grid VerticalAlignment="Bottom" Margin="35,80" Height="200">
             <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="18"/>
-            <StackPanel VerticalAlignment="Bottom" Margin="15">
+            <StackPanel VerticalAlignment="Top" Margin="15 40 15 0">
                 <Label Content="Username:"/>
                 <TextBox FontFamily="Champagne &amp; Limousines" FontSize="18" Padding="3" x:Name="loginField" 
-                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="AliceBlue" Background="#e9e9e9" Width="242" Height="23"/>
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="AliceBlue" Background="#e9e9e9" Width="242" Height="35"/>
                 <Label Content="Password:"/>
-                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password}" Padding="3" Height="30" Width="249"/>
-                <Label Name="lblContactEmail1" Content="Secret Phrase:" Visibility="{Binding IsChecked,ElementName=isAdmin,Converter={StaticResource b2v}}"/>
-                <components:BindablePasswordBox  x:Name="SecretPhraseBox" Grid.Column="1" Password="{Binding SecretPhrase}" Visibility="{Binding IsChecked,ElementName=isAdmin,Converter={StaticResource b2v}}" Padding="3" Height="30" Width="249"/>
-                <CheckBox x:Name="isAdmin" Content="I'm admin" FontFamily="Champagne &amp; Limousines" FontSize="13" Margin="0 30 0 15" IsChecked="{Binding IsAdmin}" />
+                <components:BindablePasswordBox Grid.Column="1" Password="{Binding Password}" Padding="3" Height="41" Width="249"/>
             </StackPanel>
         </Grid>
         <Button Cursor="Hand" Width="160" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="LOGIN" Background="#2a2e4d" x:Name="loginButton" Foreground="White" Padding="7"
                 Command="{Binding SignIn}"/>
+        <Button Cursor="Hand" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,405,0,0" Content="I'm not registered yet." Background="Transparent" x:Name="registerButton" BorderBrush="{x:Null}" Foreground="DarkBlue" Padding="7"
+                Command="{Binding SignUp}"/>
         <Image Source="../../Images/Icons/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
         <Button VerticalAlignment="Top" HorizontalAlignment="Right" BorderThickness="0" Margin="6" Click="crossButton_Click" x:Name="crossButton" Width="25" Height="25">
             <Button.Background>

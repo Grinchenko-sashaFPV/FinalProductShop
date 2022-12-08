@@ -11,5 +11,6 @@ namespace ClientWPF.Repositories.Interfaces
     {
         void AddImages(string[] pathes, int productId);
         IEnumerable<ProductImage> GetImagesByProductId(int productId);
+        void DeleteProductImagesByProductId(int productId);
     }
 }

@@ -107,6 +107,26 @@
     <Compile Include="Migrations\202212031354356_UpdatedProductAndBaseAuthorization.designer.cs">
       <DependentUpon>202212031354356_UpdatedProductAndBaseAuthorization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212041206450_BankAccountMigration.cs" />
+    <Compile Include="Migrations\202212041206450_BankAccountMigration.designer.cs">
+      <DependentUpon>202212041206450_BankAccountMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212041529584_UserImageMigration.cs" />
+    <Compile Include="Migrations\202212041529584_UserImageMigration.designer.cs">
+      <DependentUpon>202212041529584_UserImageMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212041643460_ChangedRelationShipsMigration.cs" />
+    <Compile Include="Migrations\202212041643460_ChangedRelationShipsMigration.designer.cs">
+      <DependentUpon>202212041643460_ChangedRelationShipsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212041648063_UserMigration.cs" />
+    <Compile Include="Migrations\202212041648063_UserMigration.designer.cs">
+      <DependentUpon>202212041648063_UserMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212041655040_UserOneToOneMigration.cs" />
+    <Compile Include="Migrations\202212041655040_UserOneToOneMigration.designer.cs">
+      <DependentUpon>202212041655040_UserOneToOneMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Components\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
@@ -115,8 +135,10 @@
     <Compile Include="MVVM\ViewModel\ProducerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddProductViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProductDetailsViewModel.cs" />
-    <Compile Include="MVVM\View\AuthorizationWindow.xaml.cs">
-      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    <Compile Include="MVVM\ViewModel\RegistrationViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\UsersViewModel.cs" />
+    <Compile Include="MVVM\View\AuthorizationView.xaml.cs">
+      <DependentUpon>AuthorizationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\CategoryView.xaml.cs">
       <DependentUpon>CategoryView.xaml</DependentUpon>
@@ -130,27 +152,34 @@
     <Compile Include="MVVM\View\ProductDetailsView.xaml.cs">
       <DependentUpon>ProductDetailsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\RegistrationView.xaml.cs">
+      <DependentUpon>RegistrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Implementation\BankAccountsRepository.cs" />
     <Compile Include="Repositories\Implementation\CategoriesRepository.cs" />
     <Compile Include="Repositories\Implementation\ProducersRepository.cs" />
     <Compile Include="Repositories\Implementation\ProductImagesRepository.cs" />
     <Compile Include="Repositories\Implementation\ProductsRepository.cs" />
+    <Compile Include="Repositories\Implementation\UserImagesRepository.cs" />
     <Compile Include="Repositories\Implementation\UsersRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IBankAccountsRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICategoriesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProducersRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductImagesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUserImagesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUsersRepository.cs" />
     <Compile Include="Windows\CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ProductDetailsWindow.xaml.cs">
-      <DependentUpon>ProductDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MVVM\Components\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\AuthorizationWindow.xaml">
+    <Page Include="MVVM\View\AuthorizationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,7 +211,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SavedView.xaml">
+    <Page Include="MVVM\View\RegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,7 +231,6 @@
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProductsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ProfileViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SavedViewModel.cs" />
     <Compile Include="MVVM\View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -212,13 +240,14 @@
     <Compile Include="MVVM\View\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SavedView.xaml.cs">
-      <DependentUpon>SavedView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVVM\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\UsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\CustomButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,10 +267,6 @@
     <Page Include="Windows\CustomMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\ProductDetailsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -288,6 +313,21 @@
     <EmbeddedResource Include="Migrations\202212031354356_UpdatedProductAndBaseAuthorization.resx">
       <DependentUpon>202212031354356_UpdatedProductAndBaseAuthorization.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212041206450_BankAccountMigration.resx">
+      <DependentUpon>202212041206450_BankAccountMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212041529584_UserImageMigration.resx">
+      <DependentUpon>202212041529584_UserImageMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212041643460_ChangedRelationShipsMigration.resx">
+      <DependentUpon>202212041643460_ChangedRelationShipsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212041648063_UserMigration.resx">
+      <DependentUpon>202212041648063_UserMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212041655040_UserOneToOneMigration.resx">
+      <DependentUpon>202212041655040_UserOneToOneMigration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -319,8 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\close-icon.png" />
-    <Resource Include="Images\icon-1.png" />
-    <Resource Include="Images\user-profile.jpg" />
+    <Resource Include="Images\money_easy.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\icon-1024.png" />
@@ -370,6 +409,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\defUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\users_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fast_delivery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\new_product.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

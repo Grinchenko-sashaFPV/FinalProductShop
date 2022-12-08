@@ -16,8 +16,9 @@ using System.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class ProductsViewModel
+    internal class ProductsViewModel : ObservableObject
     {
+        private User _currentUser;
         private readonly ProductsRepository _productsRepository;
         private readonly ProducersRepository _producersRepository;
         private readonly CategoriesRepository _categoriesRepository;
@@ -32,7 +33,7 @@ namespace ClientWPF.MVVM.ViewModel
         private Product _selectedProduct;
         private string _starRatesImageSource;
         public ProductsViewModel(ProductsRepository productsRepository, ProducersRepository producersRepository,
-            CategoriesRepository categoriesRepository, ProductImagesRepository productImagesRepository)
+            CategoriesRepository categoriesRepository, ProductImagesRepository productImagesRepository, User currentUser)
         {
             _productsRepository = productsRepository;
             _producersRepository = producersRepository;
@@ -42,6 +43,7 @@ namespace ClientWPF.MVVM.ViewModel
             _selectedProducer = new Producer();
             _selectedCategory = new Category();
             _selectedProduct = new Product();
+            _currentUser = currentUser;
 
             Producers = new ObservableCollection<Producer>();
             Categories = new ObservableCollection<Category>();
@@ -82,12 +84,14 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 _selectedProduct = value;
                 var buff_pathes = LoadImagesForProduct(_selectedProduct.Id);
-                    _selectedProduct.ProductImage = buff_pathes.ToList();
+                SelectedProduct.ProductImage = buff_pathes.ToList();
                 //
-                ProductDetailsViewModel viewModel = new ProductDetailsViewModel(_selectedProduct);
-                
-                //ProductDetailsWindow productDetailsWindow = new ProductDetailsWindow(_selectedProduct);
-                //productDetailsWindow.Show();
+                //ProductDetailsViewModel viewModel = new ProductDetailsViewModel(_selectedProduct);
+                if(SelectedProduct != null)
+                {
+                    ProductDetailsView productDetailsView = new ProductDetailsView(SelectedProduct, _currentUser);
+                    productDetailsView.ShowDialog();
+                }
                 OnPropertyChanged("SelectedProduct");
             }
         }
@@ -171,21 +175,162 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 var products = _productsRepository.GetProductsByProducerAndCategoryId(producerId, categoryId);
                 foreach (var product in products)
+                {
                     Products.Add(product);
+                    var images = LoadImagesForProduct(product.Id);
+                    if (images.Count > 0)
+                    {
+                        product.ProductImage = images;
+                        // TODO
+                        product.ImageBytes = product.ProductImage.ToList()[0].Image;
+                        string rateImageSource = "";
+                        switch (product.Rate)
+                        {
+                            case 0:
+                                rateImageSource = "/Images/StarRates/Star_rating_0_of_5.png";
+                                break;
+                            case 0.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_0.5_of_5.png";
+                                break;
+                            case 1:
+                                rateImageSource = "/Images/StarRates/Star_rating_1_of_5.png";
+                                break;
+                            case 1.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_1.5_of_5.png";
+                                break;
+                            case 2:
+                                rateImageSource = "/Images/StarRates/Star_rating_2_of_5.png";
+                                break;
+                            case 2.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_2.5_of_5.png";
+                                break;
+                            case 3:
+                                rateImageSource = "/Images/StarRates/Star_rating_3_of_5.png";
+                                break;
+                            case 3.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_3.5_of_5.png";
+                                break;
+                            case 4:
+                                rateImageSource = "/Images/StarRates/Star_rating_4_of_5.png";
+                                break;
+                            case 4.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_4.5_of_5.png";
+                                break;
+                            case 5:
+                                rateImageSource = "/Images/StarRates/Star_rating_5_of_5.png";
+                                break;
+                        }
+                        product.CurrentRateSource = rateImageSource;
+                    }
+                }
                 OnPropertyChanged("Products");
             }
             else if (producerId == -2 && categoryId != -2)
             {
                 var products = _productsRepository.GetProductsByCategoryId(categoryId);
                 foreach (var product in products)
+                {
                     Products.Add(product);
+                    var images = LoadImagesForProduct(product.Id);
+                    if (images.Count > 0)
+                    {
+                        product.ProductImage = images;
+                        // TODO
+                        product.ImageBytes = product.ProductImage.ToList()[0].Image;
+                        string rateImageSource = "";
+                        switch (product.Rate)
+                        {
+                            case 0:
+                                rateImageSource = "/Images/StarRates/Star_rating_0_of_5.png";
+                                break;
+                            case 0.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_0.5_of_5.png";
+                                break;
+                            case 1:
+                                rateImageSource = "/Images/StarRates/Star_rating_1_of_5.png";
+                                break;
+                            case 1.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_1.5_of_5.png";
+                                break;
+                            case 2:
+                                rateImageSource = "/Images/StarRates/Star_rating_2_of_5.png";
+                                break;
+                            case 2.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_2.5_of_5.png";
+                                break;
+                            case 3:
+                                rateImageSource = "/Images/StarRates/Star_rating_3_of_5.png";
+                                break;
+                            case 3.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_3.5_of_5.png";
+                                break;
+                            case 4:
+                                rateImageSource = "/Images/StarRates/Star_rating_4_of_5.png";
+                                break;
+                            case 4.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_4.5_of_5.png";
+                                break;
+                            case 5:
+                                rateImageSource = "/Images/StarRates/Star_rating_5_of_5.png";
+                                break;
+                        }
+                        product.CurrentRateSource = rateImageSource;
+                    }
+                }
                 OnPropertyChanged("Products");
             }
             else if(producerId != -2 && categoryId == -2)
             {
                 var products = _productsRepository.GetProductsByProducerId(producerId);
                 foreach (var product in products)
+                {
                     Products.Add(product);
+                    var images = LoadImagesForProduct(product.Id);
+                    if (images.Count > 0)
+                    {
+                        product.ProductImage = images;
+                        // TODO
+                        product.ImageBytes = product.ProductImage.ToList()[0].Image;
+                        string rateImageSource = "";
+                        switch (product.Rate)
+                        {
+                            case 0:
+                                rateImageSource = "/Images/StarRates/Star_rating_0_of_5.png";
+                                break;
+                            case 0.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_0.5_of_5.png";
+                                break;
+                            case 1:
+                                rateImageSource = "/Images/StarRates/Star_rating_1_of_5.png";
+                                break;
+                            case 1.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_1.5_of_5.png";
+                                break;
+                            case 2:
+                                rateImageSource = "/Images/StarRates/Star_rating_2_of_5.png";
+                                break;
+                            case 2.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_2.5_of_5.png";
+                                break;
+                            case 3:
+                                rateImageSource = "/Images/StarRates/Star_rating_3_of_5.png";
+                                break;
+                            case 3.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_3.5_of_5.png";
+                                break;
+                            case 4:
+                                rateImageSource = "/Images/StarRates/Star_rating_4_of_5.png";
+                                break;
+                            case 4.5:
+                                rateImageSource = "/Images/StarRates/Star_rating_4.5_of_5.png";
+                                break;
+                            case 5:
+                                rateImageSource = "/Images/StarRates/Star_rating_5_of_5.png";
+                                break;
+                        }
+                        product.CurrentRateSource = rateImageSource;
+                    }
+                }
                 OnPropertyChanged("Products");
             }
             else
@@ -205,6 +350,10 @@ namespace ClientWPF.MVVM.ViewModel
             else
                 LoadProducers();
         }
+        private List<ProductImage> LoadImagesForProduct(int productId)
+        {
+            return _productImagesRepository.GetImagesByProductId(productId).ToList();
+        }
         #endregion
 
         #region Star image source adapter & load images func
@@ -217,11 +366,8 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged("StarRatesImageSource");
             }
         }
-        private List<ProductImage> LoadImagesForProduct(int productId)
-        {
-            return _productImagesRepository.GetImagesByProductId(productId).ToList();
-        }
         #endregion
+
         #region Commands
         private readonly RelayCommand _refreshCategories;
         public RelayCommand RefreshCategories
@@ -231,6 +377,8 @@ namespace ClientWPF.MVVM.ViewModel
                 return _refreshCategories ?? (new RelayCommand(obj =>
                 {
                     LoadCategories();
+                    if(Categories.Count > 0)
+                        SelectedCategory = Categories[0];
                 }));
             }
         }
@@ -241,19 +389,16 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 return _refreshProducers ?? (new RelayCommand(obj =>
                 {
-                    if(_selectedCategory != null)
+                    if(SelectedCategory != null)
                         LoadProducersByCategoryId(_selectedCategory.Id);
                     else 
                         LoadProducers();
+                    //
+                    if (Producers.Count > 0)
+                        SelectedProducer = Producers[0];
                 }));
             }
         }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

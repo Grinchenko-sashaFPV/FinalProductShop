@@ -1,5 +1,7 @@
 ﻿using ClientWPF.Core;
 using ClientWPF.Repositories.Implementation;
+using ClientWPF.Windows;
+using FileLibrary;
 using ModelsLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -13,16 +15,18 @@ using System.Windows;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class ProducerViewModel : INotifyPropertyChanged
+    internal class ProducerViewModel : ObservableObject
     {
         private readonly CategoriesRepository _categoriesRepository;
         private readonly ProducersRepository _producersRepository;
+        private readonly ProductsRepository _productsRepository;
         public ObservableCollection<Category> Categories { get; set; }
         public ObservableCollection<Producer> Producers { get; set; }
         public ProducerViewModel(CategoriesRepository categoriesRepository, ProducersRepository producersRepository)
         {
             _categoriesRepository = categoriesRepository;
             _producersRepository = producersRepository;
+            _productsRepository = new ProductsRepository();
 
             Categories = new ObservableCollection<Category>();
             Producers = new ObservableCollection<Producer>();
@@ -31,6 +35,7 @@ namespace ClientWPF.MVVM.ViewModel
             LoadProducers();
         }
 
+        #region Accessors
         private string _searchedPhrase;
         public string SearchedPhrase
         {
@@ -60,6 +65,8 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged("NewNameProducer");
             }
         }
+        #endregion
+
         #region Selected objects
         private Category _selectedCategory;
         public Category SelectedCategory
@@ -82,6 +89,7 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
+
         #region Load data adapter
         private void LoadCategories()
         {
@@ -98,6 +106,7 @@ namespace ClientWPF.MVVM.ViewModel
                 Producers.Add(producer);
         }
         #endregion
+
         #region Commands
         private readonly RelayCommand _saveChangedProducer;
         public RelayCommand SaveChangedProducer
@@ -123,70 +132,47 @@ namespace ClientWPF.MVVM.ViewModel
             {
                 return _deleteSelectedProducer ?? (new RelayCommand(obj =>
                 {
-                    /*
-                    var result = MessageBox.Show($"Are you sure you want to delete {_selectedCategory.Name}?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes && _selectedCategory != null)
+                    var result = MessageBox.Show($"Are you sure you want to delete {SelectedProducer.Name}?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes && SelectedProducer != null)
                     {
+                        MessageBox.Show("!");
                         string name = SelectedProducer.Name;
-                        var producerList = _producersRepository.GetAllProducersByCategoryId(SelectedCategory.Id);
-                        var productsList = _productsRepository.GetProductsByCategoryId(SelectedCategory.Id);
-                        if (producerList?.Count > 0)
+                        var productsList = _productsRepository.GetProductsByProducerId(SelectedProducer.Id);
+                        if (productsList?.Count > 0)
                         {
-                            CustomMessageBox questionDialog = new CustomMessageBox($"{name} has ${producerList.Count} producers and ${productsList.Count} products! Delete them or make independent?",
-                                "Delete category with childs", "Delete category without childs");
+                            CustomMessageBox questionDialog = new CustomMessageBox($"{name} has ${productsList.Count} products! Delete them or make independent?",
+                                "Delete product with childs", "Delete product without childs");
                             questionDialog.Focus();
                             questionDialog.ShowDialog();
                             if (questionDialog.option == 2)
                             {
                                 if (productsList.Count > 0)
                                     _productsRepository.DeleteProductsByCategoryId(_selectedCategory.Id);
-                                if (producerList.Count > 0)
-                                    _producerRepository.DeleteProducersByCategoryId(_selectedCategory.Id);
-                                _categoriesRepository.DeleteCategory(_selectedCategory.Id);
-                                Categories.Remove(_selectedCategory);
+                                _producersRepository.DeleteProducerById(SelectedProducer.Id);
                                 MessageBox.Show($"{name} was successfully deleted with all childs!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             if (questionDialog.option == 3)
                             {
                                 // Save objects to binary file
-                                if (producerList.Count > 0)
-                                    BinaryFileManager.SaveObjectsToFile(@"../../Archive/producers.dat", producerList);
                                 if (productsList.Count > 0)
                                 {
-                                    foreach (var product in productsList)
-                                    {
-                                        // TODO !!! CHECK Images, smth can be not working!
-                                        // Get images of that products and add them to product
-                                        var imagesOfProduct = _productsImagesRepository.GetImagesByProductId(product.Id);
-                                        if (imagesOfProduct.ToList().Count > 0)
-                                        {
-                                            product.ProductImage = new List<ProductImage>();
-                                            foreach (var image in imagesOfProduct)
-                                                product.ProductImage.ToList().Add(image);
-                                            MessageBox.Show($"Photos count -> {product.ProductImage.ToList().Count.ToString()}");
-                                        }
-                                    }
                                     // Serialize all
                                     BinaryFileManager.SaveObjectsToFile(@"../../Archive/products.dat", productsList);
+                                    _productsRepository.DeleteProductsByProducerId(SelectedProducer.Id);
                                 }
-                                // Then delete by cascade all models
-                                if (producerList.Count > 0)
-                                    _productsRepository.DeleteProductsByCategoryId(_selectedCategory.Id);
-                                if (producerList.Count > 0)
-                                    _producerRepository.DeleteProducersByCategoryId(_selectedCategory.Id);
-                                _categoriesRepository.DeleteCategory(_selectedCategory.Id);
-                                Categories.Remove(_selectedCategory);
+                                _producersRepository.DeleteProducerById(SelectedProducer.Id);
                                 MessageBox.Show($"Only {name} was successfully deleted!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                         }
                         else
                         {
-                            _categoriesRepository.DeleteCategory(_selectedCategory.Id);
-                            Categories.Remove(_selectedCategory);
+                            _producersRepository.DeleteProducerById(SelectedProducer.Id);
+                            Producers.Remove(SelectedProducer);
+                            if (Producers.Count > 0)
+                                SelectedProducer = Producers[0];
                             MessageBox.Show($"{name} was successfully deleted!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                     }
-                    */
                 }));
             }
         }
@@ -230,12 +216,5 @@ namespace ClientWPF.MVVM.ViewModel
             }
         }
         #endregion
-        //
-        //
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

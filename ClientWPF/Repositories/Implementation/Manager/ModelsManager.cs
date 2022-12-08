@@ -17,6 +17,8 @@ namespace ClientWPF.Repositories.Implementation.Manager
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserImage> UserImages { get; set; }
+        public virtual DbSet<BankAccount> BankAccounts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

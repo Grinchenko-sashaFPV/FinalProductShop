@@ -15,19 +15,15 @@ using System.Windows.Shapes;
 namespace ClientWPF.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for AuthorizationWindow.xaml
+    /// Interaction logic for AuthorizationView.xaml
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class AuthorizationView : Window
     {
-        public AuthorizationWindow()
+        public AuthorizationView()
         {
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, RoutedEventArgs e)
-        {
-            // DO CODE
-        }
 
         private void crossButton_Click(object sender, RoutedEventArgs e)
         {

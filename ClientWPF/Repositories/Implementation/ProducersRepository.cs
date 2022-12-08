@@ -21,6 +21,12 @@ namespace ClientWPF.Repositories.Implementation
             _dbManager.SaveChanges();
         }
 
+        public void DeleteProducerById(int producerId)
+        {
+            _dbManager.Producers.Remove(GetProducerById(producerId));
+            _dbManager.SaveChanges();
+        }
+
         public void DeleteProducersByCategoryId(int categoryId)
         {
             foreach (var producer in _dbManager.Producers)
@@ -51,7 +57,7 @@ namespace ClientWPF.Repositories.Implementation
             return _dbManager.Producers.Where(p => p.Name.Contains(phrase)).ToList();
         }
 
-        public Producer GetProducersById(int producerId)
+        public Producer GetProducerById(int producerId)
         {
             return _dbManager.Producers.Find(producerId);
         }

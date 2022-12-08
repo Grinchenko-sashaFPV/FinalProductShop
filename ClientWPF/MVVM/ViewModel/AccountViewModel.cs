@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace ClientWPF.MVVM.ViewModel
 {
-    internal class AccountViewModel : INotifyPropertyChanged
+    internal class AccountViewModel : ObservableObject
     {
         private const string _secret = "Я люблю Грінченко"; 
         private int attempts;
@@ -29,6 +29,8 @@ namespace ClientWPF.MVVM.ViewModel
             IsAdmin = false;
             attempts = 3;
         }
+
+        #region Accessors
         private string _name;
         public string Name 
         {
@@ -70,20 +72,21 @@ namespace ClientWPF.MVVM.ViewModel
                 OnPropertyChanged(nameof(IsAdmin));
             }
         }
+        #endregion
 
+        #region Commands
         private readonly RelayCommand _signIn;
         public RelayCommand SignIn
         {
             get
             {
-                // TODO !! Delete checkBox IsAdmin and move to registration window. It is not neccessary!
                 return _signIn ?? (new RelayCommand(async obj =>
                 {
-                    User user = await _usersRepository.FindUserByName(Name);
-                    string pass = MD5Generator.ProduceMD5Hash(Password);
+                    User user = _usersRepository.FindUserByName(Name);
                     if (user != null && attempts > 0)
                     {
                         
+                        string pass = MD5Generator.ProduceMD5Hash(Password);
                         // Admin or user
                         if (IsAdmin && SecretPhrase.ToLower().Trim() == "я" && user.Password == pass && user.Name == Name
                         || !IsAdmin && user.Name == Name && user.Password == pass)
@@ -94,6 +97,8 @@ namespace ClientWPF.MVVM.ViewModel
                             App.Current.MainWindow = window;
                             App.Current.Windows[0].Close(); // Close Authorization window
                         }
+                        else
+                            MessageBox.Show($"Incorrect data! Attemps left: {attempts--}");
                     }
                     else
                     {
@@ -108,10 +113,19 @@ namespace ClientWPF.MVVM.ViewModel
                 }));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        private readonly RelayCommand _signUp;
+        public RelayCommand SignUp
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            get
+            {
+                return _signUp ?? (new RelayCommand(async obj =>
+                {
+                    RegistrationView registrationView = new RegistrationView();
+                    registrationView.ShowDialog();
+                    registrationView.Focus();
+                }));
+            }
         }
+        #endregion
     }
 }

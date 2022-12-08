@@ -11,6 +11,9 @@ namespace ClientWPF.Repositories.Interfaces
     {
         Task<int> AddUser(User newUser);
         void UpdateUser(User changedUser);
-        Task<User> FindUserByName(string userName);
+        User FindUserByName(string userName);
+        void DeleteUser(int userId);
+        List<User> GetAllUsers();
+        List<User> GetUsersByContaintsLetters(string letters);
     }
 }

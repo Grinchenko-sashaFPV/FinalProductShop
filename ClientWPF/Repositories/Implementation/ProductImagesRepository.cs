@@ -53,6 +53,14 @@ namespace ClientWPF.Repositories.Implementation
             }
         }
 
+        public void DeleteProductImagesByProductId(int productId)
+        {
+            var productImages = _dbManager.ProductImages.Where(img => img.ProductId == productId);
+            foreach (var img in productImages)
+                _dbManager.ProductImages.Remove(img);
+            _dbManager.SaveChanges();
+        }
+
         public IEnumerable<ProductImage> GetImagesByProductId(int productId)
         {
             return _dbManager.ProductImages.Where(p => p.ProductId == productId);
